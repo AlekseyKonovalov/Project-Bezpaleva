@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp">
+
+        <Button
+            android:text="Вход в систему"
+            android:id="@+id/butInputSystem"
+            android:layout_width="300dp"
+            android:layout_height="80dp"
+            android:onClick="butInputSystem_Click"
+           />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:text="Карта"
+            android:layout_width="150dp"
+            android:layout_height="130dp"
+            />
+        <Button
+            android:text="Настройки"
+            android:layout_width="150dp"
+            android:layout_height="130dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:text="Справка"
+        android:layout_width="150dp"
+        android:layout_height="130dp"
+        />
+    <Button
+        android:text="Контакты"
+        android:layout_width="150dp"
+        android:layout_height="130dp"
+        />
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp">
+
+    <TextView
+        android:text="Аноним"
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>
