@@ -8,12 +8,23 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        
+        <activity android:name=".InputSystemActivity"
+            android:label="Вход в систему">
+        </activity>
+        
+        <activity android:name=".InformationActivityy"
+            android:label="Справка">
+        </activity>
+
+        <activity android:name=".MapActivity">
         </activity>
     </application>
 

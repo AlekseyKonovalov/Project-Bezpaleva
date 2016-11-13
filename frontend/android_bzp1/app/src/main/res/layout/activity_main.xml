@@ -30,11 +30,13 @@
             android:text="Карта"
             android:layout_width="150dp"
             android:layout_height="130dp"
+            android:onClick="butMap_Click"
             />
         <Button
             android:text="Настройки"
             android:layout_width="150dp"
             android:layout_height="130dp"
+            android:onClick="butSettings_Click"
             />
     </LinearLayout>
 
@@ -46,24 +48,15 @@
         android:text="Справка"
         android:layout_width="150dp"
         android:layout_height="130dp"
+        android:onClick="butInfo_Click"
         />
     <Button
         android:text="Контакты"
         android:layout_width="150dp"
         android:layout_height="130dp"
+        android:onClick="butContacts_Click"
         />
-</LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp">
-
-    <TextView
-        android:text="Аноним"
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
     </LinearLayout>
+
 
 </LinearLayout>
