@@ -1,8 +1,8 @@
 package com.bezPalevaServer.db;
 
 import javax.persistence.*;
-import java.awt.*;
-import java.sql.Date;
+
+import java.sql.Timestamp;
 
 @Entity
 public class Mark {
@@ -15,8 +15,8 @@ public class Mark {
     private String type;
     private String description;
     private String photo_path;
-    private Long death_time;
-    private int relev_coeff;
+    private Timestamp death_time;
+    private int irrelevance_level;
 
     public Long getId() {
         return id;
@@ -34,32 +34,44 @@ public class Mark {
         return type;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void incIrrelevanceLevel() {
+        this.irrelevance_level++;
+    }
+
     public String getDescription() {
         return description;
+    }
+
+    public void setPhoto_path(String photo_path) {
+        this.photo_path = photo_path;
     }
 
     public String getphoto_path() {
         return photo_path;
     }
 
-    public Long getDeathTime() {
+    public Timestamp getDeathTime() {
         return death_time;
     }
 
-    public int getrelev_coeff() {
-        return relev_coeff;
+    public int getirrelevanceLevel() {
+        return irrelevance_level;
     }
 
     public Mark(){}
 
-    public Mark(double x, double y, String type, String description, String photo_path, Long deathTime, int relev_coeff) {
+    public Mark(double x, double y, String type, String description,  long deathTime) {
         this.x = x;
         this.y = y;
         this.type = type;
         this.description = description;
-        this.photo_path = photo_path;
-        this.death_time = deathTime;
-        this.relev_coeff = relev_coeff;
+        this.photo_path = null;
+        this.death_time = new Timestamp(deathTime);
+        this.irrelevance_level = 0;
     }
 
 }

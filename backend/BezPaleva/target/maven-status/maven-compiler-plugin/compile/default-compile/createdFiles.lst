@@ -1,6 +1,7 @@
 com\bezPalevaServer\Services\MarkService.class
 com\bezPalevaServer\Controllers\IndexController.class
 com\bezPalevaServer\BezPalevaApplication.class
+com\bezPalevaServer\Services\MarksScheduler.class
 com\bezPalevaServer\Controllers\MarkController.class
 com\bezPalevaServer\db\MarkRepository.class
 com\bezPalevaServer\db\Mark.class

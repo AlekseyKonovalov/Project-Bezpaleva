@@ -8,4 +8,6 @@
 
 </body>
        <h1>Привет ребята</h1>
+        <img src="/images/img1.jpg"/>
+<!--  <img src ="/photo?path=C:\photos\542221img1.jpg" />   -->
 </html>

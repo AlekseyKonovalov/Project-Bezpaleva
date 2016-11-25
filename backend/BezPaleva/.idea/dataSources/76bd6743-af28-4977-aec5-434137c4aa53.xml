@@ -33,11 +33,11 @@
     </column>
     <column id="12" parent="5" name="death_time">
       <mandatory>1</mandatory>
-      <data-type>bigint(20)|0</data-type>
+      <data-type>datetime|0</data-type>
     </column>
-    <column id="13" parent="5" name="relev_coeff">
+    <column id="13" parent="5" name="irrelevance_level">
       <mandatory>1</mandatory>
-      <data-type>double|0</data-type>
+      <data-type>int(11)|0</data-type>
     </column>
     <key id="14" parent="5" name="PRIMARY">
       <columns>id</columns>
