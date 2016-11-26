@@ -2,6 +2,7 @@ package com.bezPalevaServer.Controllers;
 
 import com.bezPalevaServer.Services.MarkService;
 import com.bezPalevaServer.Services.MarksScheduler;
+import com.bezPalevaServer.Services.SystemParameters;
 import com.bezPalevaServer.db.Mark;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -23,7 +24,8 @@ public class MarkController {
 
     @Autowired
     MarkService markService;
-
+    @Autowired
+    SystemParameters systemParameters;
 
     @RequestMapping(value = "/mark", method = RequestMethod.GET)
     public ArrayList<Mark> getMarks (@RequestParam Map<String, String> params)  {
@@ -48,18 +50,16 @@ public class MarkController {
         if(x == null || y == null || type==null) return  null;
         else {
             Calendar deathTime = Calendar.getInstance();
-            deathTime.add(Calendar.HOUR, markService.getDeathTimeSize());
+            deathTime.add(Calendar.HOUR, systemParameters.getDeathTimeSize());
 
             Mark mark = new Mark(Double.parseDouble(x), Double.parseDouble(y), type, description, deathTime.getTimeInMillis());
 
-            if(photoFile != null){
-                File file = new File("C:/photos/"+ photoFile.hashCode() + photoFile.getOriginalFilename());
-                photoFile.transferTo(file);
-                mark.setPhoto_path(file.getAbsolutePath());
-            }
+            if(photoFile != null) markService.createPhotoFile(photoFile, mark, null);
+
             return markService.addMarkInDB(mark);
         }
     }
+
 
     @RequestMapping(value = "/changeMark", method = RequestMethod.POST)
     public Mark changeMark(@RequestParam Map<String, String> params, MultipartFile photoFile) throws IOException {
@@ -75,13 +75,7 @@ public class MarkController {
             if (mark != null) {
 
                 if (description != null) mark.setDescription(description);
-                if (photoFile != null) {
-                    File file;
-                    if (photoPath != null) file = new File(photoPath);
-                    else file = new File("C:/photos/" + photoFile.hashCode() + photoFile.getOriginalFilename());
-                    photoFile.transferTo(file);
-                    mark.setPhoto_path(file.getAbsolutePath());
-                }
+                if (photoFile != null) markService.createPhotoFile(photoFile, mark, photoPath);
                 if (irrelevance != null) mark.incIrrelevanceLevel();
                 return markService.addMarkInDB(mark);
             }
@@ -99,4 +93,5 @@ public class MarkController {
         ImageIO.write(img,"jpg", bos);
         return bos.toByteArray();
     }
+
 }
