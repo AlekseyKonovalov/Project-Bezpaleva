@@ -3,6 +3,7 @@
 buildscript {
     repositories {
         jcenter()
+        maven { url 'https://maven.fabric.io/public'}
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.2'
@@ -15,9 +16,10 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        mavenCentral()
+        maven { url 'https://github.com/yandexmobile/yandexmapkit-android/raw/maven/' }
     }
 }
-
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
