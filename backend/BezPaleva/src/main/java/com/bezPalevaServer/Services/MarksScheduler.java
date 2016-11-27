@@ -31,7 +31,7 @@ public class MarksScheduler {
         List<Mark> marks = markRepository.getMarksForDeletion(new Timestamp(new Date().getTime()), systemParameters.getIrrelevanceLevelMax());
 
         for (Mark mark: marks) {
-            String photoPath = mark.getphoto_path();
+            String photoPath = mark.getPhotoPath();
             if(photoPath!= null) new File(photoPath).delete();
             markRepository.delete(mark);
         }

@@ -14,9 +14,9 @@ public class Mark {
     private double y;
     private String type;
     private String description;
-    private String photo_path;
-    private Timestamp death_time;
-    private int irrelevance_level;
+    private String photoPath;
+    private Timestamp deathTime;
+    private int irrelevanceLevel;
 
     public Long getId() {
         return id;
@@ -39,27 +39,27 @@ public class Mark {
     }
 
     public void incIrrelevanceLevel() {
-        this.irrelevance_level++;
+        this.irrelevanceLevel++;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setPhoto_path(String photo_path) {
-        this.photo_path = photo_path;
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
     }
 
-    public String getphoto_path() {
-        return photo_path;
+    public String getPhotoPath() {
+        return photoPath;
     }
 
     public Timestamp getDeathTime() {
-        return death_time;
+        return deathTime;
     }
 
-    public int getirrelevanceLevel() {
-        return irrelevance_level;
+    public int getIrrelevanceLevel() {
+        return irrelevanceLevel;
     }
 
     public Mark(){}
@@ -69,9 +69,9 @@ public class Mark {
         this.y = y;
         this.type = type;
         this.description = description;
-        this.photo_path = null;
-        this.death_time = new Timestamp(deathTime);
-        this.irrelevance_level = 0;
+        this.photoPath = null;
+        this.deathTime = new Timestamp(deathTime);
+        this.irrelevanceLevel = 0;
     }
 
 }

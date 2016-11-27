@@ -55,7 +55,7 @@ public class MarkService {
 
             photoFile.transferTo(file);
 
-            mark.setPhoto_path(file.getAbsolutePath());
+            mark.setPhotoPath(file.getAbsolutePath());
         }
     }
 }
