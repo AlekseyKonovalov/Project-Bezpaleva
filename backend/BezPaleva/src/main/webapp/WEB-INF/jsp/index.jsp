@@ -11,23 +11,46 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
     <script type="text/javascript">
-        ymaps.ready(init);
-        var myMap,
-                myPlacemark;
+        // 1. Создаём новый объект XMLHttpRequest
+        var xhr = new XMLHttpRequest();
+        var array;
+        // 2. Конфигурируем его: GET-запрос на URL 'phones.json'
+        xhr.open('GET', 'http://localhost:8080/mark?x=55&y=61&rad=10000', false);
 
-        function init(){
-            myMap = new ymaps.Map("map", {
-                center: [55.116272, 61.430735],
-                zoom: 15
-            });
+        // 3. Отсылаем запрос
+        xhr.send();
 
-            myPlacemark = new ymaps.Placemark([55.116272, 61.430735], {
+        // 4. Если код ответа сервера не 200, то это ошибка
+        if (xhr.status != 200) {
+// обработать ошибку
+            alert( xhr.status + ': ' + xhr.statusText ); // пример вывода: 404: Not Found
+        } else {
+// вывести результат
+            //alert( xhr.responseText ); // responseText -- текст ответа.
+       array=JSON.parse(xhr.responseText);
 
-                balloonContent: 'Активные'
-            });
+       ymaps.ready(init);
+            function init(){
+                myMap = new ymaps.Map("map", {
+                    center: [55.116272, 61.430735],
+                    zoom: 15
+                });
+                //alert(array.length);
+                for(var i=0; i<array.length;i++) {
+                    myPlacemark = new ymaps.Placemark([array[i].x
+                        , array[i].y], {
 
-            myMap.geoObjects.add(myPlacemark);
+                        balloonContent: array[i].description
+                    });
+
+                    myMap.geoObjects.add(myPlacemark);
+                }
+                }
         }
+
+
+
+
     </script>
 </head>
 <body>
