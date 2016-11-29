@@ -1,16 +1,35 @@
 package com.example.bzp1;
 
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Mark{
 
+    @SerializedName("id")
+    @Expose
     private int id;
+    @SerializedName("x")
+    @Expose
     private double x;
+    @SerializedName("y")
+    @Expose
     private double y;
+    @SerializedName("type")
+    @Expose
     private String type;
+    @SerializedName("description")
+    @Expose
     private String description;
+    @SerializedName("photoPath")
+    @Expose
     private String photoPath;
+    @SerializedName("irrelevanceLevel")
+    @Expose
     private int irrelevanceLevel;
-    private int deathTime;
+    @SerializedName("deathTime")
+    @Expose
+    private long deathTime;
 
     public double getX() {
         return x;
@@ -18,7 +37,7 @@ public class Mark{
     public double getY() {
         return y;
     }
-    public int getDeathTime() {
+    public long getDeathTime() {
         return deathTime;
     }
     public int getId() {
@@ -37,7 +56,7 @@ public class Mark{
         return type;
     }
 
-    public void setDeathTime(int deathTime) {
+    public void setDeathTime(long deathTime) {
         this.deathTime = deathTime;
     }
     public void setDescription(String description) {
@@ -61,4 +80,23 @@ public class Mark{
     public void setY(double y) {
         this.y = y;
     }
+
+    public Mark(double x, double y, String type, String description ){
+        this.x=x;
+        this.y=y;
+        this.type=type;
+        this.description=description;
+    }
+
+    public Mark(int id, double x, double y, String type, String description , String photoPath, int irrelevanceLevel, int deathTime){
+        this.x=x;
+        this.y=y;
+        this.type=type;
+        this.description=description;
+        this.photoPath=photoPath;
+        this.irrelevanceLevel=irrelevanceLevel;
+        this.deathTime=deathTime;
+    }
 }
+
+

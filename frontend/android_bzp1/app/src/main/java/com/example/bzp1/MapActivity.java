@@ -3,6 +3,7 @@ package com.example.bzp1;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -15,11 +16,10 @@ import ru.yandex.yandexmapkit.utils.*;
 public class MapActivity extends AppCompatActivity {
     MapController mMapController;
     OverlayManager mOverlayManager;
-    private ArrayList<Mark> Marks;
+    ListMarks listMarks;
+
 
     @Override
-
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -45,6 +45,12 @@ public class MapActivity extends AppCompatActivity {
 
         // Create a layer of objects for the map
         Overlay overlay = new Overlay(mMapController);
+
+        //DownloaderMarks dm=new DownloaderMarks();
+        //dm.Download();
+
+        HandlerMarks hm=new HandlerMarks();
+        hm.sendMark();
 
         // Create an object for the layer
         final OverlayItem kremlin = new OverlayItem(new GeoPoint(55.177635, 61.331487), res.getDrawable(R.drawable.mark));
