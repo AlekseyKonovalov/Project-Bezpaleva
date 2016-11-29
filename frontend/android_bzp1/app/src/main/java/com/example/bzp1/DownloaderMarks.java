@@ -2,9 +2,6 @@ package com.example.bzp1;
 
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import java.util.*;
 import retrofit2.*;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -22,7 +19,7 @@ public class DownloaderMarks {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        MarksAPI service = retrofit.create(MarksAPI.class);
+        MarksAPIget service = retrofit.create(MarksAPIget.class);
         Call<List<Mark>> call = service.getMarks();
 
         call.enqueue(new Callback<List<Mark>>() {

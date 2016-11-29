@@ -46,11 +46,11 @@ public class MapActivity extends AppCompatActivity {
         // Create a layer of objects for the map
         Overlay overlay = new Overlay(mMapController);
 
-        //DownloaderMarks dm=new DownloaderMarks();
-        //dm.Download();
+        DownloaderMarks dm=new DownloaderMarks();
+        dm.Download();
 
-        HandlerMarks hm=new HandlerMarks();
-        hm.sendMark();
+       // HandlerMarks hm=new HandlerMarks();
+      //  hm.sendMark();
 
         // Create an object for the layer
         final OverlayItem kremlin = new OverlayItem(new GeoPoint(55.177635, 61.331487), res.getDrawable(R.drawable.mark));
