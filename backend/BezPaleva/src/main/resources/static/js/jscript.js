@@ -13,20 +13,47 @@ if (xhr.status != 200) {
     ymaps.ready(init);
 }
 
+function getColor(type) {
+    var color;
+    switch (type)
+    {
+        case 'dps': color='#0411c1'
+            break;
+        case 'help' : color='#fb4e14'
+            break;
+        case 'other' :color='#3caa3c'
+            break;
+        case 'camera' : color='#e2f005'
+            break;
+        default: color='#3caa3c'
+    }
+return color;
+}
+
+
 function init () {
     myMap = new ymaps.Map("map", {
-        center: [55.116272, 61.430735],
-        zoom: 15
+        center: [55.160026, 61.419069],
+        zoom: 10
     }, {
         balloonMaxWidth: 1000,
         searchControlProvider: 'yandex#search'
     });
     for(var i=0; i<array.length;i++) {
+        var color=getColor(array[i].type);
         myPlacemark = new ymaps.Placemark([array[i].x
             , array[i].y], {
 
-            balloonContent: array[i].description
-        });
+            balloonContent: array[i].description},
+            {
+                iconColor: color
+            }
+            // #fb4e14 красный
+            // #0411c1 синий
+            // #3caa3c зеленый
+            // #e2f005 желтый
+
+        );
         myMap.geoObjects.add(myPlacemark);
     }
 // Обработка события, возникающего при щелчке
@@ -51,17 +78,18 @@ function init () {
 
     function addMark (x, y)
     {
-
-
-        // console.log(description);
+        var desc=document.getElementById('marker_balloontext').value;
+        var type=document.getElementById('image').value;
+        var color=
+        getColor (type);
         document.getElementById('addmarker').onclick = function()
 
         {
-            myPlacemark = new ymaps.Placemark([x
+            var myPlacemark = new ymaps.Placemark([x
                 , y], {
 
-                balloonContent: document.getElementById('marker_balloontext').value
-            });
+                balloonContent: desc
+            },{iconColor:color});
             myMap.geoObjects.add(myPlacemark);
 
 
@@ -70,15 +98,12 @@ function init () {
             var data = {
                 x: x,
                 y: y,
-                type:    document.getElementById('image').value
+                type: type
             ,
-                description: document.getElementById('marker_balloontext').value,
+                description: desc,
                 photoPath: '',
                 irrelevanceLevel: '',
                 deathTime: 1480177654887
-
-
-
             };
 
             var boundary = String(Math.random()).slice(2);
@@ -90,14 +115,10 @@ function init () {
                 // добавление поля
                 body.push('Content-Disposition: form-data; name="' + key + '"\r\n\r\n' + data[key] + '\r\n');
             }
-
             body = body.join(boundaryMiddle) + boundaryLast;
-
             // Тело запроса готово, отправляем
-
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'http://localhost:8080/mark?x='+x+'&y='+y+'&type='+document.getElementById('image').value+'&desc='+document.getElementById('marker_balloontext').value, true);
-
             xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + boundary);
 /*
             xhr.onreadystatechange = function() {
@@ -107,8 +128,6 @@ function init () {
             }
 */
             xhr.send(body);
-
         }
-
     }
 }

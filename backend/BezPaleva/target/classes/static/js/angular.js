@@ -2,26 +2,10 @@
  * Created by Протик on 24.11.2016.
  */
 
-var app = angular.module("game", ["ngRoute","ngResource"]);
-/*
-app.config(function($routeProvider) {
-    $routeProvider
-        .when("/page/:id", {
-            templateUrl : function(page){
-                return "assets/"+page+".html"
-            },
-            controller: "pagesController"
-        })
-        .otherwise("page/0");
-})
-    .controller("pagesController",function($scope,$log,$rootScope,$routeParams){
-        $scope.page=parseInt($routeParams.id) || 0;
-    })
-*/
-
 var app=angular.module('game', ['ngRoute'])
     app.config( ['$routeProvider', function($routeProvider) {
         $routeProvider
+
             .when('/page/0', {
                 templateUrl: '/assets/0.html'
             })
@@ -42,12 +26,7 @@ var app=angular.module('game', ['ngRoute'])
                 templateUrl: '/assets/0.html'
             });
     }])
-
-
-
-
-
-    .directive("menu", function(){
+        .directive("menu", function(){
         return {
             templateUrl:"assets/menu.html",
             replace: true,
