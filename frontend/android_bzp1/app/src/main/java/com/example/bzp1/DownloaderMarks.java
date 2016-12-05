@@ -10,9 +10,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DownloaderMarks {
 
-
-    public void Download(){
-        String webServiceUrl="http://88.205.135.253:8080";
+    private   List<Mark> lm;
+    public void Download(List<Mark> listMarks){
+        String webServiceUrl="http://localhost:8080";
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(webServiceUrl)
@@ -30,12 +30,10 @@ public class DownloaderMarks {
                 if (response.isSuccessful()) {
                     // request successful (status code 200, 201)
                     List<Mark> result = response.body();
-
+                    lm=result;
                     Log.i("bzp1", "result ok");
 
-
                 } else {
-                    System.out.println("err");
                     //request not successful (like 400,401,403 etc)
                     //Handle errors
                     Log.i("bzp1", "result not ok");
@@ -44,14 +42,11 @@ public class DownloaderMarks {
 
             @Override
             public void onFailure(Call<List<Mark>> call, Throwable t) {
-
                 Log.i("bzp1", t.getMessage());
-
             }
         });
 
-
-
+        listMarks=lm;
     }
 
 }

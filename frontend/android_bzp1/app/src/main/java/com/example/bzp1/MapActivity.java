@@ -1,23 +1,34 @@
 package com.example.bzp1;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.widget.Toast;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import ru.yandex.yandexmapkit.*;
+import ru.yandex.yandexmapkit.map.MapEvent;
+import ru.yandex.yandexmapkit.map.OnMapListener;
 import ru.yandex.yandexmapkit.overlay.Overlay;
 import ru.yandex.yandexmapkit.overlay.OverlayItem;
 import ru.yandex.yandexmapkit.overlay.balloon.BalloonItem;
+import ru.yandex.yandexmapkit.overlay.drag.DragAndDropItem;
+import ru.yandex.yandexmapkit.overlay.location.MyLocationItem;
 import ru.yandex.yandexmapkit.utils.*;
 
-public class MapActivity extends AppCompatActivity {
+import static ru.yandex.core.CoreApplication.getActivity;
+//public class MapActivity extends Activity implements OnMapListener {
+
+public class MapActivity extends Activity  {
     MapController mMapController;
     OverlayManager mOverlayManager;
-    ListMarks listMarks;
-
+    List<Mark> listMarks;
+    MyLocationItem myLocationItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +42,17 @@ public class MapActivity extends AppCompatActivity {
         mMapController = mapView.getMapController();
         // determining the user's location
         mMapController.getOverlayManager().getMyLocation().setEnabled(true);
+
         mOverlayManager = mMapController.getOverlayManager();
         // Изменяем зум
         mMapController.setZoomCurrent(14);
-
         //
+
+       //mMapController.addMapListener(this);
+
+        //mapView.getMapController().getOverlayManager().addOverlay(new DialogNewMark(mapView.getMapController()));
+
+        mOverlayManager.addOverlay(new  DialogNewMark(mMapController));
         showObject();
     }
 
@@ -46,36 +63,27 @@ public class MapActivity extends AppCompatActivity {
         // Create a layer of objects for the map
         Overlay overlay = new Overlay(mMapController);
 
-        DownloaderMarks dm=new DownloaderMarks();
-        dm.Download();
+        //DownloaderMarks dm=new DownloaderMarks();
+        //dm.Download(listMarks);
 
-       // HandlerMarks hm=new HandlerMarks();
-      //  hm.sendMark();
+     //   HandlerMarks hm=new HandlerMarks();
+      //  hm.sendMark(listMarks);
 
-        // Create an object for the layer
         final OverlayItem kremlin = new OverlayItem(new GeoPoint(55.177635, 61.331487), res.getDrawable(R.drawable.mark));
         // Create a balloon model for the object
         BalloonItem balloonKremlin = new BalloonItem(this,kremlin.getGeoPoint());
-        balloonKremlin.setText(getString(R.string.kremlin));
-//        // Add the balloon model to the object
+        balloonKremlin.setText("ff");
+        // Add the balloon model to the object
         kremlin.setBalloonItem(balloonKremlin);
         // Add the object to the layer
         overlay.addOverlayItem(kremlin);
 
-        // Create an object for the layer
-        final OverlayItem yandex = new OverlayItem(new GeoPoint(55.179453, 61.333633), res.getDrawable(R.drawable.mark));
-        // Create the balloon model for the object
-        BalloonItem balloonYandex = new BalloonItem(this,yandex.getGeoPoint());
-        balloonYandex.setText(getString(R.string.yandex));
-        // Add the balloon model to the object
-        yandex.setBalloonItem(balloonYandex);
-        // Add the object to the layer
-        overlay.addOverlayItem(yandex);
 
         // Add the layer to the map
         mOverlayManager.addOverlay(overlay);
-
     }
+
+
 }
 
 

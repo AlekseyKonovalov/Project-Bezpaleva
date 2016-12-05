@@ -5,14 +5,15 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListMarks{
 
     @SerializedName("ListMarks")
     @Expose
-    private ArrayList<Mark> ListMarks= new ArrayList<Mark>();
+    private List<Mark> ListMarks= new ArrayList<Mark>();
 
-    public ArrayList<Mark> getMarks() {
+    public List<Mark> getMarks() {
         return ListMarks;
     }
 
