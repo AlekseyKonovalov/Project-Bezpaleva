@@ -81,6 +81,10 @@ public class Mark{
         this.y = y;
     }
 
+    public Mark(){
+
+    }
+
     public Mark(double x, double y, String type, String description ){
         this.x=x;
         this.y=y;

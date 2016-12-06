@@ -9,11 +9,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HandlerMarks{
 
-    public void sendMark(ListMarks listMarks){
+    public void sendMark(Mark tempMark){
         String webServiceUrl="http://88.205.135.253:8080";
-
-        Mark tempMark=new Mark(55.177635, 61.331487, "radar", "cops on the road brothers kashirins");
-
+        Log.i("bzp1", "3");
+        //Mark tempMark=new Mark(55.177635, 61.331487, "radar", "cops on the road brothers kashirins");
+        Log.i("bzp1", tempMark.getType());
+        Log.i("bzp1", tempMark.getDescription());
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(webServiceUrl)

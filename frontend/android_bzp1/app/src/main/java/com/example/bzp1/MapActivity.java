@@ -1,28 +1,18 @@
 package com.example.bzp1;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.util.Log;
-import android.widget.Toast;
 
 import java.util.List;
 
 import ru.yandex.yandexmapkit.*;
-import ru.yandex.yandexmapkit.map.MapEvent;
-import ru.yandex.yandexmapkit.map.OnMapListener;
 import ru.yandex.yandexmapkit.overlay.Overlay;
 import ru.yandex.yandexmapkit.overlay.OverlayItem;
 import ru.yandex.yandexmapkit.overlay.balloon.BalloonItem;
-import ru.yandex.yandexmapkit.overlay.drag.DragAndDropItem;
 import ru.yandex.yandexmapkit.overlay.location.MyLocationItem;
 import ru.yandex.yandexmapkit.utils.*;
 
-import static ru.yandex.core.CoreApplication.getActivity;
-//public class MapActivity extends Activity implements OnMapListener {
 
 public class MapActivity extends Activity  {
     MapController mMapController;
@@ -42,17 +32,12 @@ public class MapActivity extends Activity  {
         mMapController = mapView.getMapController();
         // determining the user's location
         mMapController.getOverlayManager().getMyLocation().setEnabled(true);
-
         mOverlayManager = mMapController.getOverlayManager();
         // Изменяем зум
         mMapController.setZoomCurrent(14);
-        //
-
-       //mMapController.addMapListener(this);
-
-        //mapView.getMapController().getOverlayManager().addOverlay(new DialogNewMark(mapView.getMapController()));
-
+        //add new mark
         mOverlayManager.addOverlay(new  DialogNewMark(mMapController));
+
         showObject();
     }
 
