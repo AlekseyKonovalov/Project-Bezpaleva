@@ -3,7 +3,8 @@
  */
 var xhr = new XMLHttpRequest();
 var array;
-xhr.open('GET', 'http://localhost:8080/mark?x=55&y=61&rad=10000', false);
+//xhr.open('GET', 'http://localhost:8080/mark?x=55&y=61&rad=10000', false);
+xhr.open('GET', '/mark?x=55&y=61&rad=10000', false);
 xhr.send();
 if (xhr.status != 200) {
     alert( xhr.status + ': ' + xhr.statusText ); // пример вывода: 404: Not Found
@@ -118,7 +119,8 @@ function init () {
             body = body.join(boundaryMiddle) + boundaryLast;
             // Тело запроса готово, отправляем
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://localhost:8080/mark?x='+x+'&y='+y+'&type='+document.getElementById('image').value+'&desc='+document.getElementById('marker_balloontext').value, true);
+            //xhr.open('POST', 'http://localhost:8080/mark?x='+x+'&y='+y+'&type='+document.getElementById('image').value+'&desc='+document.getElementById('marker_balloontext').value, true);
+            xhr.open('POST', '/mark?x='+x+'&y='+y+'&type='+document.getElementById('image').value+'&desc='+document.getElementById('marker_balloontext').value, true);
             xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + boundary);
 /*
             xhr.onreadystatechange = function() {
