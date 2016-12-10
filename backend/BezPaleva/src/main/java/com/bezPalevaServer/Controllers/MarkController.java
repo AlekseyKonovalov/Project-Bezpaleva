@@ -3,7 +3,9 @@ package com.bezPalevaServer.Controllers;
 import com.bezPalevaServer.Services.MarkService;
 import com.bezPalevaServer.Services.MarksScheduler;
 import com.bezPalevaServer.Services.SystemParameters;
+import com.bezPalevaServer.Services.UserService;
 import com.bezPalevaServer.db.Mark;
+import com.bezPalevaServer.db.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +26,8 @@ public class MarkController {
 
     @Autowired
     MarkService markService;
+    @Autowired
+    UserService userService;
     @Autowired
     SystemParameters systemParameters;
 
@@ -46,13 +50,16 @@ public class MarkController {
         String y = params.get("y");
         String type = params.get("type");
         String description = params.get("desc");
+        String userId = params.get("userId");
 
-        if(x == null || y == null || type==null) return  null;
+        if(x == null || y == null || type == null || userId == null) return  null;
         else {
             Calendar deathTime = Calendar.getInstance();
             deathTime.add(Calendar.HOUR, systemParameters.getDeathTimeSize());
 
-            Mark mark = new Mark(Double.parseDouble(x), Double.parseDouble(y), type, description, deathTime.getTimeInMillis());
+            User user = userService.getUserFromDB(Long.parseLong(userId));
+
+            Mark mark = new Mark(Double.parseDouble(x), Double.parseDouble(y), type, description, deathTime.getTimeInMillis(), user);
 
             if(photoFile != null) markService.createPhotoFile(photoFile, mark, null);
 
@@ -68,6 +75,7 @@ public class MarkController {
         String description = params.get("desc");
         String photoPath = params.get("photo");
         String irrelevance = params.get("irrel");
+        String userId = params.get("userId");
 
         if (id != null){
             Mark mark = markService.getMarkFromDB(Long.parseLong(id));
@@ -76,6 +84,7 @@ public class MarkController {
 
                 if (description != null) mark.setDescription(description);
                 if (photoFile != null) markService.createPhotoFile(photoFile, mark, photoPath);
+
                 if (irrelevance != null) mark.incIrrelevanceLevel();
                 return markService.addMarkInDB(mark);
             }

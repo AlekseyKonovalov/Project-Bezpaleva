@@ -8,38 +8,83 @@
     <schema id="3" name="mysql"/>
     <schema id="4" name="performance_schema"/>
     <table id="5" parent="1" name="Mark"/>
-    <column id="6" parent="5" name="id">
+    <table id="6" parent="1" name="User"/>
+    <column id="7" parent="5" name="id">
       <mandatory>1</mandatory>
       <data-type>bigint(20)|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="7" parent="5" name="x">
+    <column id="8" parent="5" name="x">
       <mandatory>1</mandatory>
       <data-type>double|0</data-type>
     </column>
-    <column id="8" parent="5" name="y">
+    <column id="9" parent="5" name="y">
       <mandatory>1</mandatory>
       <data-type>double|0</data-type>
     </column>
-    <column id="9" parent="5" name="type">
+    <column id="10" parent="5" name="type">
       <mandatory>1</mandatory>
       <data-type>varchar(100)|0</data-type>
     </column>
-    <column id="10" parent="5" name="description">
+    <column id="11" parent="5" name="description">
       <data-type>varchar(500)|0</data-type>
     </column>
-    <column id="11" parent="5" name="photo_path">
+    <column id="12" parent="5" name="photo_path">
       <data-type>varchar(100)|0</data-type>
     </column>
-    <column id="12" parent="5" name="death_time">
+    <column id="13" parent="5" name="death_time">
       <mandatory>1</mandatory>
       <data-type>datetime|0</data-type>
     </column>
-    <column id="13" parent="5" name="irrelevance_level">
+    <column id="14" parent="5" name="irrelevance_level">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <key id="14" parent="5" name="PRIMARY">
+    <column id="15" parent="5" name="user_id">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <index id="16" parent="5" name="Mark_User_id_fk">
+      <columns>user_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="17" parent="5" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="18" parent="5" name="Mark_User_id_fk">
+      <columns>user_id</columns>
+      <ref-key>~.User.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="19" parent="6" name="id">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="20" parent="6" name="first_name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="21" parent="6" name="last_name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="22" parent="6" name="nickname">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="23" parent="6" name="rating">
+      <data-type>double|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="24" parent="6" name="photo_path">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="25" parent="6" name="vk_id">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <key id="26" parent="6" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>

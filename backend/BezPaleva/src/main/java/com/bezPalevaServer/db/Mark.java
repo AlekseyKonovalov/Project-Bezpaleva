@@ -17,6 +17,9 @@ public class Mark {
     private String photoPath;
     private Timestamp deathTime;
     private int irrelevanceLevel;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Long getId() {
         return id;
@@ -64,7 +67,7 @@ public class Mark {
 
     public Mark(){}
 
-    public Mark(double x, double y, String type, String description,  long deathTime) {
+    public Mark(double x, double y, String type, String description,  long deathTime, User user) {
         this.x = x;
         this.y = y;
         this.type = type;
@@ -72,6 +75,14 @@ public class Mark {
         this.photoPath = null;
         this.deathTime = new Timestamp(deathTime);
         this.irrelevanceLevel = 0;
+        this.user = user;
     }
 
+    public long getUser() {
+        return user.getId();
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

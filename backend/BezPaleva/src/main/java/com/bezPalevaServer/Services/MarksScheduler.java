@@ -28,13 +28,15 @@ public class MarksScheduler {
     @Scheduled(fixedDelay = 3600000)
     public void deleteMarks() {
 
-        List<Mark> marks = markRepository.getMarksForDeletion(new Timestamp(new Date().getTime()), systemParameters.getIrrelevanceLevelMax());
+        Timestamp currentTime =  new Timestamp(new Date().getTime());
 
-        for (Mark mark: marks) {
-            String photoPath = mark.getPhotoPath();
-            if(photoPath!= null) new File(photoPath).delete();
-            markRepository.delete(mark);
+        List<String> photosPaths = markRepository.getPhotosPaths(currentTime, systemParameters.getIrrelevanceLevelMax());
+
+        for (String path : photosPaths) {
+            new File(path).delete();
         }
+
+        markRepository.deleteOutdatedMarks(currentTime, systemParameters.getIrrelevanceLevelMax());
 
     }
 }
