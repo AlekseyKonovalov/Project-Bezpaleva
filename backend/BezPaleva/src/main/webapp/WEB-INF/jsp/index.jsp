@@ -7,6 +7,7 @@
     <script src="https://code.angularjs.org/1.4.2/angular-resource.js"></script>
     <script src="js/angular.js"></script>
 
+
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -16,9 +17,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
     <script src="js/jscript.js" type="text/javascript"> </script>
+    <link rel="import" href="assets/5.html">
+
+
 </head>
 <body>
 {{2+2}}
+
+
+
+
 <menu></menu>
 
 <ng-view></ng-view>
