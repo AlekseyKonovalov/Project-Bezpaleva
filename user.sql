@@ -10,27 +10,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Дамп структуры для таблица bezPaleva.Mark
-CREATE TABLE IF NOT EXISTS `Mark` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `x` double NOT NULL,
-  `y` double NOT NULL,
-  `type` varchar(100) NOT NULL,
-  `description` varchar(500) DEFAULT NULL,
-  `photo_path` varchar(100) DEFAULT NULL,
-  `death_time` datetime NOT NULL,
-  `irrelevance_level` int(11) NOT NULL,
-  `user_id` bigint(20) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `Mark_User_id_fk` (`user_id`),
-  CONSTRAINT `Mark_User_id_fk` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Дамп данных таблицы bezPaleva.Mark: ~0 rows (приблизительно)
-/*!40000 ALTER TABLE `Mark` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Mark` ENABLE KEYS */;
-
-
 -- Дамп структуры для таблица bezPaleva.User
 CREATE TABLE IF NOT EXISTS `User` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
