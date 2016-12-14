@@ -48,7 +48,7 @@ public class MapActivity extends Activity  {
         mMapController.setZoomCurrent(14);
 
         //add new mark
-        mOverlayManager.addOverlay(new  DialogNewMark(mMapController));
+        mOverlayManager.addOverlay(new  DialogNewMark(mMapController, "Добавление новой метки"));
 
         showObject();
     }

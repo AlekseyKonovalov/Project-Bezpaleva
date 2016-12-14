@@ -22,10 +22,11 @@ import static ru.yandex.core.CoreApplication.getApplicationContext;
 public class DialogNewMark extends Overlay {
 
     private Mark newMark=new Mark();
+    private String typeChange;
 
-
-    public DialogNewMark(MapController mapController ) {
+    public DialogNewMark(MapController mapController, String typeChange ) {
         super(mapController);
+        this.typeChange=typeChange;
     }
 
     @Override
@@ -45,7 +46,7 @@ public class DialogNewMark extends Overlay {
         newMark.setType(mChooseTypesMark [0]);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getMapController().getContext());
-        builder.setTitle("Добавление новой метки")
+        builder.setTitle(typeChange)
                 .setCancelable(false)
                 // добавляем переключатели
                 .setSingleChoiceItems(mChooseTypes, 0,
@@ -80,6 +81,50 @@ public class DialogNewMark extends Overlay {
                                         getApplicationContext(),
                                         "Ваша метка добавлена на карту",
                                         Toast.LENGTH_SHORT).show();
+
+                                //сразу добавим метку на карту
+                                //ОСТОРОЖНО ДУБЛЯЖ КОДА С MAPACTIVITY с метода ShowObjects !!!!!!
+
+                                Resources res = getMapController().getContext().getResources();
+                                Overlay overlay = new Overlay(getMapController());
+
+                                //да и вообще как так получается, что этот класс создается в ОверлайМенеджер,
+                                // и мне приходится опять тут создавать оверлай менеджер
+                                OverlayManager mOverlayManager;
+                                mOverlayManager =getMapController().getOverlayManager();
+                                final OverlayItem mrk;
+                                switch (newMark.getType()){
+                                    case "dps":
+                                        mrk = new OverlayItem(new GeoPoint(newMark.getX(), newMark.getY()), res.getDrawable(R.drawable.dps));
+                                        break;
+                                    case "camera":
+                                        mrk = new OverlayItem(new GeoPoint(newMark.getX(), newMark.getY()),  res.getDrawable(R.drawable.camera));
+                                        break;
+                                    case "help":
+                                        mrk = new OverlayItem(new GeoPoint(newMark.getX(), newMark.getY()),  res.getDrawable(R.drawable.help));
+                                        break;
+                                    case "other":
+                                        mrk = new OverlayItem(new GeoPoint(newMark.getX(), newMark.getY()),  res.getDrawable(R.drawable.other));
+                                        break;
+                                    default:
+                                        mrk = new OverlayItem(new GeoPoint(newMark.getX(), newMark.getY()),  res.getDrawable(R.drawable.other));
+                                        break;
+                                }
+                                ImageBalloonItem balloonMrk = new ImageBalloonItem(getMapController().getContext(), mrk.getGeoPoint());
+
+                                balloonMrk.setDescriptionOnBalloon(newMark.getDescription());
+                                balloonMrk.setText(newMark.getDescription());
+                                balloonMrk.setOnViewClickListener();
+
+                                // Add the balloon model to the object
+                                mrk.setBalloonItem(balloonMrk);
+                                //Add the object to the layer
+                                overlay.addOverlayItem(mrk);
+
+                                // Add the layer to the map
+
+                                mOverlayManager.addOverlay(overlay);
+
                             }
                         })
 

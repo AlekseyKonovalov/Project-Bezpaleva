@@ -56,7 +56,7 @@ public class ImageBalloonItem extends BalloonItem implements OnBalloonListener{
                 dialog.setTitle("Click delete");
                 break;
             case R.id.balloon_images_view2:
-                dialog.setTitle("Click change");
+                dialog.setTitle("Click delete");
                 break;
         }
         dialog.show();
