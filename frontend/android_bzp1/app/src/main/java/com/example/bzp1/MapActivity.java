@@ -48,7 +48,7 @@ public class MapActivity extends Activity  {
         mMapController.setZoomCurrent(14);
 
         //add new mark
-        mOverlayManager.addOverlay(new  DialogNewMark(mMapController, "Добавление новой метки"));
+        mOverlayManager.addOverlay(new  DialogNewMark(mMapController));
 
         showObject();
     }
@@ -107,7 +107,7 @@ public class MapActivity extends Activity  {
 
                         //Create a balloon model for the object
 
-                        ImageBalloonItem balloonMrk = new ImageBalloonItem(mMapController.getContext(), mrk.getGeoPoint());
+                        ImageBalloonItem balloonMrk = new ImageBalloonItem(mMapController, mrk.getGeoPoint());
 
                         balloonMrk.setDescriptionOnBalloon(t.getDescription());
                         balloonMrk.setText(t.getDescription());

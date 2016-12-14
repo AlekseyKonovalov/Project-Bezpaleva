@@ -4,15 +4,13 @@ package com.example.bzp1;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import ru.yandex.yandexmapkit.MapController;
+import ru.yandex.yandexmapkit.OverlayManager;
 import ru.yandex.yandexmapkit.overlay.balloon.BalloonItem;
 import ru.yandex.yandexmapkit.overlay.balloon.OnBalloonListener;
 import ru.yandex.yandexmapkit.utils.GeoPoint;
@@ -22,12 +20,14 @@ public class ImageBalloonItem extends BalloonItem implements OnBalloonListener{
 
 
     Context mContext;
+    MapController mMapController;
     protected TextView textView;
     LayoutInflater inflater;
 
-    public ImageBalloonItem(Context context, GeoPoint geoPoint) {
-        super(context, geoPoint);
-        mContext = context;
+    public ImageBalloonItem(MapController mMapController, GeoPoint geoPoint) {
+        super(mMapController.getContext(), geoPoint);
+        mContext = mMapController.getContext();
+        this.mMapController=mMapController;
     }
 
     @Override
@@ -49,17 +49,20 @@ public class ImageBalloonItem extends BalloonItem implements OnBalloonListener{
 
     @Override
     public void onBalloonViewClick(BalloonItem item, View view) {
+        OverlayManager mOverlayManager;
+        mOverlayManager = mMapController.getOverlayManager();
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
         switch (view.getId()) {
             case R.id.balloon_images_view1:
-                dialog.setTitle("Click delete");
+                mOverlayManager.addOverlay(new DialogChangeMark(mMapController, 1));
                 break;
             case R.id.balloon_images_view2:
-                dialog.setTitle("Click delete");
+                //change mark
+                mOverlayManager.addOverlay(new DialogChangeMark(mMapController, 2));
                 break;
         }
-        dialog.show();
+
     }
 
     @Override

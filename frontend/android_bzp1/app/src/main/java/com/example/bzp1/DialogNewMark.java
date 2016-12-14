@@ -22,11 +22,11 @@ import static ru.yandex.core.CoreApplication.getApplicationContext;
 public class DialogNewMark extends Overlay {
 
     private Mark newMark=new Mark();
-    private String typeChange;
 
-    public DialogNewMark(MapController mapController, String typeChange ) {
+
+    public DialogNewMark(MapController mapController) {
         super(mapController);
-        this.typeChange=typeChange;
+
     }
 
     @Override
@@ -46,7 +46,7 @@ public class DialogNewMark extends Overlay {
         newMark.setType(mChooseTypesMark [0]);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getMapController().getContext());
-        builder.setTitle(typeChange)
+        builder.setTitle("Добавление новой метки")
                 .setCancelable(false)
                 // добавляем переключатели
                 .setSingleChoiceItems(mChooseTypes, 0,
@@ -88,8 +88,6 @@ public class DialogNewMark extends Overlay {
                                 Resources res = getMapController().getContext().getResources();
                                 Overlay overlay = new Overlay(getMapController());
 
-                                //да и вообще как так получается, что этот класс создается в ОверлайМенеджер,
-                                // и мне приходится опять тут создавать оверлай менеджер
                                 OverlayManager mOverlayManager;
                                 mOverlayManager =getMapController().getOverlayManager();
                                 final OverlayItem mrk;
@@ -110,7 +108,7 @@ public class DialogNewMark extends Overlay {
                                         mrk = new OverlayItem(new GeoPoint(newMark.getX(), newMark.getY()),  res.getDrawable(R.drawable.other));
                                         break;
                                 }
-                                ImageBalloonItem balloonMrk = new ImageBalloonItem(getMapController().getContext(), mrk.getGeoPoint());
+                                ImageBalloonItem balloonMrk = new ImageBalloonItem(getMapController(), mrk.getGeoPoint());
 
                                 balloonMrk.setDescriptionOnBalloon(newMark.getDescription());
                                 balloonMrk.setText(newMark.getDescription());
