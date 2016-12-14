@@ -30,6 +30,9 @@ public class Mark{
     @SerializedName("deathTime")
     @Expose
     private long deathTime;
+    @SerializedName("userId")
+    @Expose
+    private int userId;
 
     public double getX() {
         return x;
@@ -54,6 +57,9 @@ public class Mark{
     }
     public String getType() {
         return type;
+    }
+    public int getUserId(){
+        return userId;
     }
 
     public void setDeathTime(long deathTime) {
@@ -80,19 +86,25 @@ public class Mark{
     public void setY(double y) {
         this.y = y;
     }
+    public void setUserId(int userId){
+        this.userId=userId;
+    }
+
 
     public Mark(){
 
     }
 
-    public Mark(double x, double y, String type, String description ){
+    /*
+    public Mark(double x, double y, String type, String description, int userId ){
         this.x=x;
         this.y=y;
         this.type=type;
         this.description=description;
+        this.userId=userId;
     }
-
-    public Mark(int id, double x, double y, String type, String description , String photoPath, int irrelevanceLevel, int deathTime){
+*/
+    public Mark(int id, double x, double y, String type, String description , String photoPath, int irrelevanceLevel, int deathTime, int userId){
         this.x=x;
         this.y=y;
         this.type=type;

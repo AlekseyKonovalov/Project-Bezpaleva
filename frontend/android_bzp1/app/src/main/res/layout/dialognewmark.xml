@@ -16,7 +16,7 @@
         android:id="@+id/editDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Введите описание метки..."
+        android:hint="Максимальная длина 500 символов"
 
 
         android:layout_marginTop="20dp">

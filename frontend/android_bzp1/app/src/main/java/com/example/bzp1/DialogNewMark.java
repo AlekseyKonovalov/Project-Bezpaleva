@@ -1,7 +1,7 @@
 package com.example.bzp1;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,41 +10,43 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import ru.yandex.yandexmapkit.MapController;
-import ru.yandex.yandexmapkit.map.MapEvent;
+import ru.yandex.yandexmapkit.OverlayManager;
 import ru.yandex.yandexmapkit.overlay.Overlay;
+import ru.yandex.yandexmapkit.overlay.OverlayItem;
+import ru.yandex.yandexmapkit.overlay.balloon.BalloonItem;
+import ru.yandex.yandexmapkit.utils.GeoPoint;
 import ru.yandex.yandexmapkit.utils.ScreenPoint;
-
+import android.content.res.Resources;
 import static ru.yandex.core.CoreApplication.getApplicationContext;
 
 public class DialogNewMark extends Overlay {
 
     private Mark newMark=new Mark();
 
-    public DialogNewMark(MapController mapController) {
+
+    public DialogNewMark(MapController mapController ) {
         super(mapController);
     }
 
     @Override
     public boolean onLongPress(float x, float y) {
-        final String[] mChooseTypes = { "Пост ДПС", "Камера", "Help", "Другое"};
+        final String[] mChooseTypes = {"Пост ДПС", "Камера", "Help", "Другое"};
+        final String[] mChooseTypesMark = {"dps", "camera", "help", "other"};
+
+        getMapController().getGeoPoint(new ScreenPoint(x, y));
 
         //Получаем вид с файла prompt.xml, который применим для диалогового окна:
         LayoutInflater li = LayoutInflater.from(getMapController().getContext());
         View promptsView = li.inflate(R.layout.dialognewmark, null);
         final EditText userInputDesc = (EditText) promptsView.findViewById(R.id.editDesc);
 
-        newMark.setX(x);
-        newMark.setY(y);
-        newMark.setType(mChooseTypes [0]);
+        newMark.setX(getMapController().getGeoPoint(new ScreenPoint(x, y)).getLat());
+        newMark.setY(getMapController().getGeoPoint(new ScreenPoint(x, y)).getLon());
+        newMark.setType(mChooseTypesMark [0]);
 
-        Log.i("bzp1", Double.toString(newMark.getX()) );
-        Log.i("bzp1", Double.toString(newMark.getY()) );
-
- 
         AlertDialog.Builder builder = new AlertDialog.Builder(getMapController().getContext());
         builder.setTitle("Добавление новой метки")
                 .setCancelable(false)
-
                 // добавляем переключатели
                 .setSingleChoiceItems(mChooseTypes, 0,
                         new DialogInterface.OnClickListener() {
@@ -56,7 +58,7 @@ public class DialogNewMark extends Overlay {
                                         "Вы выбрали тип метки: "
                                                 + mChooseTypes[item],
                                         Toast.LENGTH_SHORT).show();
-                                newMark.setType(mChooseTypes[item]);
+                                newMark.setType(mChooseTypesMark[item]);
                             }
                         })
 
@@ -69,10 +71,15 @@ public class DialogNewMark extends Overlay {
                                                 int id) {
 
                                 newMark.setDescription(userInputDesc.getText().toString());
-
+                                newMark.setUserId(1);
                                 //передаем данные
                                 HandlerMarks hm=new HandlerMarks();
-                                hm.sendMark(newMark);
+                                hm.sendMark(newMark, getMapController().getContext() );
+
+                                Toast.makeText(
+                                        getApplicationContext(),
+                                        "Ваша метка добавлена на карту",
+                                        Toast.LENGTH_SHORT).show();
                             }
                         })
 
@@ -86,7 +93,6 @@ public class DialogNewMark extends Overlay {
                         });
 
         builder.create().show();
-
         return true;
     }
 }
