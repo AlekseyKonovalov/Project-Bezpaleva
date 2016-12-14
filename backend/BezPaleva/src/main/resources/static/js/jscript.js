@@ -49,9 +49,32 @@ function init () {
         myPlacemark = new ymaps.Placemark([array[i].x
             , array[i].y], {
 
-            balloonContent: array[i].description},
+            balloonContent:
+            'x:'+
+            array[i].x+'  y:'+
+                array[i].y+
+            '<h3> Описание: </h3>'+
+            '<h4>'+
+            array[i].description+
+            '</h4>'+
+            '<h3>Редактирование</h3>'+
+            ['<input class="form-control" name="balloon_text" id="marker_balloontext" rows="5" cols="25"></input>',
+            '<select name="image" id="image" class="form-control">',
+            '<option value="dps">ДПС</option>',
+            '<option value="camera">Камера</option>',
+            '<option value="help">Помощь</option>',
+            '<option value="other">Другое</option>',
+
+            '</select>',
+
+            '<label for="submit">&nbsp;</label><input class="btn btn-lg btn-info" type="submit" name="submit" id="addmarker" value="Редактировать" onclick=changeMark(Coords[0],Coords[1],document.getElementById("marker_balloontext").value,document.getElementById("image").value)>'
+    ]
+
+
+        },
             {
                 iconColor: color
+
             }
         );
         myMap.geoObjects.add(myPlacemark);
@@ -85,14 +108,13 @@ function addMark (x, y,desc,type)
 {
     console.log("Сработал эддмарк");
     //console.log(x,y);
+
     var color=
         getColor (type);
 
     var myPlacemark = new ymaps.Placemark([x
-        , y], {
-
-        balloonContent: desc
-    },{iconColor:color});
+        , y]
+    ,{iconColor:color});
     myMap.geoObjects.add(myPlacemark);
     //метка на фронтенде готова
     var data = {
@@ -103,7 +125,8 @@ function addMark (x, y,desc,type)
         description: desc,
         photoPath: '',
         irrelevanceLevel: '',
-        deathTime: 1480177654887
+        deathTime: 1480177654887,
+        user: 3
     };
 
     var boundary = String(Math.random()).slice(2);
@@ -118,7 +141,7 @@ function addMark (x, y,desc,type)
     body = body.join(boundaryMiddle) + boundaryLast;
     // Тело запроса готово, отправляем
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'mark?x='+x+'&y='+y+'&type='+type+'&desc='+desc, true);
+    xhr.open('POST', 'mark?x='+x+'&y='+y+'&type='+type+'&desc='+desc+'&userId=3', true);
     xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + boundary);
     /*
      xhr.onreadystatechange = function() {
@@ -131,3 +154,52 @@ function addMark (x, y,desc,type)
     myMap.balloon.close();
 }
 
+function changeMark (x, y,desc,type)
+{
+    console.log("Сработал ченджмарк");
+    //console.log(x,y);
+/*
+    var color=
+        getColor (type);
+*/
+    var myPlacemark = new ymaps.Placemark([x
+            , y]
+        ,{iconColor:color});
+    myMap.geoObjects.add(myPlacemark);
+    //метка на фронтенде готова
+    var data = {
+        x: x,
+        y: y,
+        type: type
+        ,
+        description: desc,
+        photoPath: '',
+        irrelevanceLevel: '',
+        deathTime: 1480177654887,
+        user: 3
+    };
+
+    var boundary = String(Math.random()).slice(2);
+    var boundaryMiddle = '--' + boundary + '\r\n';
+    var boundaryLast = '--' + boundary + '--\r\n'
+
+    var body = ['\r\n'];
+    for (var key in data) {
+        // добавление поля
+        body.push('Content-Disposition: form-data; name="' + key + '"\r\n\r\n' + data[key] + '\r\n');
+    }
+    body = body.join(boundaryMiddle) + boundaryLast;
+    // Тело запроса готово, отправляем
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'changeMark?id=3&desc='+desc+'&irrel=100000000', true);
+    xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + boundary);
+    /*
+     xhr.onreadystatechange = function() {
+     if (this.readyState != 4) return;
+
+     //alert( this.responseText );
+     }
+     */
+    xhr.send(body);
+    myMap.balloon.close();
+}
