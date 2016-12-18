@@ -65,6 +65,10 @@ public class Mark {
         return irrelevanceLevel;
     }
 
+    public void setType(String type){
+        this.type = type;
+    }
+
     public Mark(){}
 
     public Mark(double x, double y, String type, String description,  long deathTime, User user) {

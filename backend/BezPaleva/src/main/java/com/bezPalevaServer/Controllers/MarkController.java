@@ -73,6 +73,7 @@ public class MarkController {
 
         String id = params.get("id");
         String description = params.get("desc");
+        String type = params.get("type");
         String photoPath = params.get("photo");
         String irrelevance = params.get("irrel");
         String userId = params.get("userId");
@@ -83,6 +84,7 @@ public class MarkController {
             if (mark != null) {
 
                 if (description != null) mark.setDescription(description);
+                if (type != null) mark.setType(type);
                 if (photoFile != null) markService.createPhotoFile(photoFile, mark, photoPath);
 
                 if (irrelevance != null) mark.incIrrelevanceLevel();
