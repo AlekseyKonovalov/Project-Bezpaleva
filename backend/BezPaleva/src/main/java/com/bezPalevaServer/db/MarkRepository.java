@@ -20,6 +20,6 @@ public interface MarkRepository extends CrudRepository<Mark, Long> {
     @Query("delete from Mark m where m.irrelevanceLevel >= :irrelLevelMax or m.deathTime <= :currentTime")
     public void deleteOutdatedMarks(@Param("currentTime") Timestamp currentTime, @Param("irrelLevelMax") int irrelLevelMax);
 
-    @Query("select m.photoPath from Mark m where m.photoPath is not null and m.irrelevanceLevel >= :irrelLevelMax or m.deathTime <= :currentTime")
+    @Query("select m.photoPath from Mark m where m.photoPath is not null and (m.irrelevanceLevel >= :irrelLevelMax or m.deathTime <= :currentTime)")
     public List<String> getPhotosPaths(@Param("currentTime") Timestamp currentTime, @Param("irrelLevelMax") int irrelLevelMax);
 }
