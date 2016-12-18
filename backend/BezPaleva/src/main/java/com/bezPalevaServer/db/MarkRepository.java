@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface MarkRepository extends CrudRepository<Mark, Long> {
     @Query("select m from Mark m where m.x <= :x+:rad and m.x >= :x-:rad and m.y <= :y+:rad and m.y >=:y-:rad")
-    public List<Mark> getAllMarksFromDB(@Param("x") double x, @Param("y") double y, @Param("rad") int rad);
+    public List<Mark> getAllMarksFromDB(@Param("x") double x, @Param("y") double y, @Param("rad") double rad);
 
     @Modifying
     @Query("delete from Mark m where m.irrelevanceLevel >= :irrelLevelMax or m.deathTime <= :currentTime")

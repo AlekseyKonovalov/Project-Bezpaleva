@@ -17,16 +17,21 @@ public class MarkService {
     @Autowired
     MarkRepository repository;
 
+    final double KILOMETER =  0.016151166114884101907362740362;
+
     public ArrayList<Mark> getMarksByRadius(double x, double y, int radius){
 
         ArrayList<Mark> marks = new ArrayList<Mark>();
 
-        double xPow, yPow;
+        double radX = Math.toRadians(x);
+        double radY = Math.toRadians(y);
 
-        for (Mark mark : repository.getAllMarksFromDB(x,y,radius)) {
-            xPow = Math.pow(mark.getX(),2);
-            yPow = Math.pow(mark.getY(),2);
-            if(Math.sqrt(xPow+yPow) <= radius)
+        double radiusOnMap = KILOMETER * radius;
+
+        for (Mark mark : repository.getAllMarksFromDB(x,y,radiusOnMap)) {
+
+            double dist =  6378137 * Math.acos(Math.cos(radX) * Math.cos(Math.toRadians(mark.getX())) * Math.cos( radY - Math.toRadians(mark.getY()) ) + Math.sin(radX) * Math.sin( Math.toRadians(mark.getX())));
+            if(dist < radius * 1000)
                 marks.add(mark);
         }
 
