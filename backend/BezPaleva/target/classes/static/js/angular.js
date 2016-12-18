@@ -18,9 +18,7 @@ var app=angular.module('game', ['ngRoute'])
             .when('/page/3', {
                 templateUrl: '/assets/3.html'
             })
-            .when('/page/4', {
-                templateUrl: '/assets/4.html'
-            })
+
 
             .otherwise({
                 templateUrl: '/assets/0.html'
