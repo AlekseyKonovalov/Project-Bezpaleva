@@ -20,7 +20,7 @@
 
 
 
-
+    <script src="https://vk.com/js/api/openapi.js?136" type="text/javascript"></script>
 
 </head>
 <body>
@@ -31,7 +31,26 @@
 
 <ng-view></ng-view>
 
+<script type="text/javascript">
+    VK.init({
+        apiId: 	5770707
+    });
+</script>
 
+
+<script type="text/javascript">
+    VK.Widgets.Auth('vk_auth', {});
+
+    var $_GET = {};
+    var __GET = window.location.search.substring(1).split("&");
+    for(var i=0; i<__GET.length; i++) {
+        var getVar = __GET[i].split("=");
+        $_GET[getVar[0]] = typeof(getVar[1])=="undefined" ? "" : getVar[1];
+    }
+
+    console.log(location.search.substring(1));
+    //
+</script>
 </body>
 
 </html>

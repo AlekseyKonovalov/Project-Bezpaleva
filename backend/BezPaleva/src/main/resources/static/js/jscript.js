@@ -306,3 +306,7 @@ function changePriority(x,y)
     myMap.balloon.close();
 }
 
+
+function test() {
+    VK.Auth.login();
+}
