@@ -3,11 +3,7 @@ package com.example.bzp1;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.widget.TextView;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import ru.yandex.yandexmapkit.*;
 import ru.yandex.yandexmapkit.overlay.Overlay;
 import ru.yandex.yandexmapkit.overlay.OverlayItem;
-import ru.yandex.yandexmapkit.overlay.balloon.BalloonItem;
-import ru.yandex.yandexmapkit.overlay.location.MyLocationItem;
 import ru.yandex.yandexmapkit.utils.*;
-import ru.yandex.yandexmapkit.overlay.balloon.OnBalloonListener;
-
 
 public class MapActivity extends Activity  {
     MapController mMapController;
@@ -57,7 +49,6 @@ public class MapActivity extends Activity  {
     public void showObject(){
 
         String webServiceUrl="http://88.205.135.253:8080";
-        Log.i("bzp1", "result  ok1");
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(webServiceUrl)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -66,8 +57,6 @@ public class MapActivity extends Activity  {
         MarksAPIget service = retrofit.create(MarksAPIget.class);
         Call<List<Mark>> call = service.getMarks();
 
-        Log.i("bzp1", "result  ok2");
-
         call.enqueue(new Callback<List<Mark>>() {
             @Override
             public void onResponse(Call<List<Mark>> call, Response<List<Mark>> response) {
@@ -75,18 +64,13 @@ public class MapActivity extends Activity  {
                 if (response.isSuccessful()) {
                     // request successful (status code 200, 201)
                     List<Mark> result = response.body();
-
-                    Log.i("bzp1", "result  ok3");
-
                     // Load required resources
                     Resources res = getResources();
                     // Create a layer of objects for the map
                     Overlay overlay = new Overlay(mMapController);
 
                     for( Mark t  : result) {
-
                         final OverlayItem mrk;
-
                         switch (t.getType()){
                             case "dps":
                                 mrk = new OverlayItem(new GeoPoint(t.getX(), t.getY()), res.getDrawable(R.drawable.dps));
@@ -104,9 +88,7 @@ public class MapActivity extends Activity  {
                                 mrk = new OverlayItem(new GeoPoint(t.getX(), t.getY()), res.getDrawable(R.drawable.other));
                                 break;
                         }
-
                         //Create a balloon model for the object
-
                         ImageBalloonItem balloonMrk = new ImageBalloonItem(mMapController, mrk.getGeoPoint());
 
                         balloonMrk.setDescriptionOnBalloon(t.getDescription());
@@ -136,7 +118,6 @@ public class MapActivity extends Activity  {
             }
         });
     }
-
 }
 
 
