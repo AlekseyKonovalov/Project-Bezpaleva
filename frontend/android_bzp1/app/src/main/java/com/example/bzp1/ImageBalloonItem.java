@@ -15,9 +15,7 @@ import ru.yandex.yandexmapkit.overlay.balloon.BalloonItem;
 import ru.yandex.yandexmapkit.overlay.balloon.OnBalloonListener;
 import ru.yandex.yandexmapkit.utils.GeoPoint;
 
-
 public class ImageBalloonItem extends BalloonItem implements OnBalloonListener{
-
 
     Context mContext;
     MapController mMapController;

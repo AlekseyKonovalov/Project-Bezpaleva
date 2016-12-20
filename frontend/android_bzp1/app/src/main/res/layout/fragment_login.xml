@@ -1,0 +1,58 @@
+<LinearLayout
+    style="@style/Container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".LoginActivity">
+
+    <Button
+        android:id="@+id/sign_in_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="16dp"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
+        android:text="@string/action_sign_in_short"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp">>
+
+        <Button
+            android:text="Карта"
+            android:id="@+id/LogInbutMap"
+            android:layout_width="150dp"
+            android:layout_height="130dp"
+
+            />
+        <Button
+            android:text="Настройки"
+            android:id="@+id/LogInbutSettings"
+            android:layout_width="150dp"
+            android:layout_height="130dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:text="Справка"
+            android:id="@+id/LogInbutInfo"
+            android:layout_width="150dp"
+            android:layout_height="130dp"
+
+            />
+        <Button
+            android:text="Контакты"
+            android:id="@+id/LogInbutContacts"
+            android:layout_width="150dp"
+            android:layout_height="130dp"
+
+            />
+    </LinearLayout>
+
+</LinearLayout>
+

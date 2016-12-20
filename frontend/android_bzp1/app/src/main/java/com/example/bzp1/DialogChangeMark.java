@@ -32,11 +32,12 @@ public class DialogChangeMark extends Overlay{
     private void buildDialogChangeMarkParameters(){
         final String[] mChooseTypes = {"Пост ДПС", "Камера", "Help", "Другое"};
         final String[] mChooseTypesMark = {"dps", "camera", "help", "other"};
+
         //Получаем вид с файла prompt.xml, который применим для диалогового окна:
 
         LayoutInflater li = LayoutInflater.from(getMapController().getContext());
-        View promptsView = li.inflate(R.layout.dialognewmark, null);
-        final EditText userInputDesc = (EditText) promptsView.findViewById(R.id.editDesc);
+        View dialognewmarkView = li.inflate(R.layout.dialognewmark, null);
+        final EditText userInputDesc = (EditText) dialognewmarkView.findViewById(R.id.editDesc);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getMapController().getContext());
         builder.setTitle("Изменение параметров метки")
@@ -56,7 +57,7 @@ public class DialogChangeMark extends Overlay{
                             }
                         })
 
-                .setView(promptsView)
+                .setView(dialognewmarkView)
 
                 .setPositiveButton("Готово",
                         new DialogInterface.OnClickListener() {
@@ -91,12 +92,12 @@ public class DialogChangeMark extends Overlay{
 
     private void buildDialogChangeMarkIrrelevanceLevel() {
         LayoutInflater li = LayoutInflater.from(getMapController().getContext());
-        View promptsView = li.inflate(R.layout.dialogchangeirrelevancelevel, null);
+        View dialogView = li.inflate(R.layout.dialogchangeirrelevancelevel, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(getMapController().getContext());
 
         builder.setTitle("Изменение актуальности метки")
                 .setCancelable(false)
-                .setView(promptsView)
+                .setView(dialogView)
                 .setPositiveButton("Да",
                         new DialogInterface.OnClickListener() {
                             @Override

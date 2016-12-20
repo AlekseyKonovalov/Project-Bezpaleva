@@ -15,11 +15,8 @@ import ru.yandex.yandexmapkit.overlay.Overlay;
 
 public class HandlerMarks  {
 
-
-
     public void sendMark(Mark tempMark, Context context){
         String webServiceUrl="http://88.205.135.253:8080";
-        Log.i("bzp1", "3");
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(webServiceUrl)
@@ -38,7 +35,14 @@ public class HandlerMarks  {
             public void onResponse(Call<Mark> call, Response<Mark> response) {
                 if (response.isSuccessful()) {
                     // request successful (status code 200, 201)
-                    Mark result = response.body();
+
+                    //!!!!!1!!
+                    //рисовать метку на карте , если не пришел ответ диалоговое окно "метка не добавлена "
+
+                    //!!!!!1!!
+
+
+
                     Log.i("bzp1", "result ok");
 
                 } else {

@@ -3,9 +3,7 @@
     <string name="about_text">
         Тонировка и помощь на дорогах.\n
         Данное приложение является является единственным приложением бренда " Bezpaleva174rus" и является основателем данной темы.\n
-        Все кто хотят открывать филиалы нашей группы,пишите администраторам о заявке в вступление в сеть групп Bezpaleva174rus .</string>
-    <string name="action_settings">Settings</string>
-    <string name="type_newmark">Добавление новой метки</string>
-
-
+        Все кто хотят открывать филиалы нашей группы,пишите администраторам
+        о заявке в вступление в сеть групп Bezpaleva174rus .</string>
+    <integer name="com_vk_sdk_AppId">5786033</integer>
 </resources>

@@ -23,10 +23,8 @@ public class DialogNewMark extends Overlay {
 
     private Mark newMark=new Mark();
 
-
     public DialogNewMark(MapController mapController) {
         super(mapController);
-
     }
 
     @Override
@@ -36,10 +34,10 @@ public class DialogNewMark extends Overlay {
 
         getMapController().getGeoPoint(new ScreenPoint(x, y));
 
-        //Получаем вид с файла prompt.xml, который применим для диалогового окна:
+        //Получаем вид с файла dialognewmark.xml, который применим для диалогового окна:
         LayoutInflater li = LayoutInflater.from(getMapController().getContext());
-        View promptsView = li.inflate(R.layout.dialognewmark, null);
-        final EditText userInputDesc = (EditText) promptsView.findViewById(R.id.editDesc);
+        View dialognewmarkView = li.inflate(R.layout.dialognewmark, null);
+        final EditText userInputDesc = (EditText)  dialognewmarkView.findViewById(R.id.editDesc);
 
         newMark.setX(getMapController().getGeoPoint(new ScreenPoint(x, y)).getLat());
         newMark.setY(getMapController().getGeoPoint(new ScreenPoint(x, y)).getLon());
@@ -63,7 +61,7 @@ public class DialogNewMark extends Overlay {
                             }
                         })
 
-                .setView(promptsView)
+                .setView( dialognewmarkView)
 
                 .setPositiveButton("Готово",
                         new DialogInterface.OnClickListener() {
@@ -83,6 +81,7 @@ public class DialogNewMark extends Overlay {
                                         Toast.LENGTH_SHORT).show();
 
                                 //сразу добавим метку на карту
+
                                 //ОСТОРОЖНО ДУБЛЯЖ КОДА С MAPACTIVITY с метода ShowObjects !!!!!!
 
                                 Resources res = getMapController().getContext().getResources();
@@ -118,11 +117,8 @@ public class DialogNewMark extends Overlay {
                                 mrk.setBalloonItem(balloonMrk);
                                 //Add the object to the layer
                                 overlay.addOverlayItem(mrk);
-
                                 // Add the layer to the map
-
                                 mOverlayManager.addOverlay(overlay);
-
                             }
                         })
 
