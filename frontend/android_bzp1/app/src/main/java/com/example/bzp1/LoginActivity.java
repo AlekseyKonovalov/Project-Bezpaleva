@@ -1,4 +1,5 @@
 package com.example.bzp1;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -15,17 +16,10 @@ import com.vk.sdk.api.VKError;
 import com.vk.sdk.util.VKUtil;
 
 
-/**
- * Activity which displays a login screen to the user, offering registration as
- * well.
- */
+
 public class LoginActivity extends FragmentActivity {
 
-    /**
-     * Scope is set of required permissions for your application
-     *
-     * @see <a href="https://vk.com/dev/permissions">vk.com api permissions documentation</a>
-     */
+
     private static final String[] sMyScope = new String[]{
             VKScope.FRIENDS,
             VKScope.WALL,
@@ -59,9 +53,6 @@ public class LoginActivity extends FragmentActivity {
 
             }
         });
-
-        //String[] fingerprint = VKUtil.getCertificateFingerprint(this, this.getPackageName());
-       //Log.i("bzp1", fingerprint[0]);
     }
 
     private void showLogout() {
@@ -100,27 +91,19 @@ public class LoginActivity extends FragmentActivity {
             @Override
             public void onResult(VKAccessToken res) {
                 // User passed Authorization
-                startMainActivity();
+
             }
 
             @Override
             public void onError(VKError error) {
                 // User didn't pass Authorization
-                startInformationActivityy();
+
             }
         };
 
         if (!VKSdk.onActivityResult(requestCode, resultCode, data, callback) ) {
             super.onActivityResult(requestCode, resultCode, data);
         }
-    }
-
-    private void startMainActivity() {
-        startActivity(new Intent(this, MainActivity.class));
-    }
-
-    private void startInformationActivityy() {
-        startActivity(new Intent(this, InformationActivityy.class));
     }
 
     public static class LoginFragment extends android.support.v4.app.Fragment {
@@ -137,9 +120,38 @@ public class LoginActivity extends FragmentActivity {
                     VKSdk.login(getActivity(), sMyScope);
                 }
             });
+
+            v.findViewById(R.id.LogInbutMap).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((LoginActivity) getActivity()).startMapNotAuthActivity();
+                }
+            });
+
+            v.findViewById(R.id.LogInbutInfo).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((LoginActivity) getActivity()).startInformationActivityy();
+                }
+            });
+
+            v.findViewById(R.id.LogInbutContacts).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((LoginActivity) getActivity()).startContactsActivity();
+                }
+            });
+
+            v.findViewById(R.id.LogInbutSettings).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((LoginActivity) getActivity()).startSettingsActivity();
+                }
+            });
+
+
             return v;
         }
-
     }
 
     public static class LogoutFragment extends android.support.v4.app.Fragment {
@@ -150,13 +162,6 @@ public class LoginActivity extends FragmentActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View v = inflater.inflate(R.layout.fragment_logout, container, false);
-            v.findViewById(R.id.continue_button).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ((LoginActivity) getActivity()).startMainActivity();
-                }
-            });
-
             v.findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -166,7 +171,58 @@ public class LoginActivity extends FragmentActivity {
                     }
                 }
             });
+
+
+            v.findViewById(R.id.LogOutbutMap).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((LoginActivity) getActivity()).startMapActivity();
+                }
+            });
+
+            v.findViewById(R.id.LogOutbutInfo).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((LoginActivity) getActivity()).startInformationActivityy();
+                }
+            });
+
+            v.findViewById(R.id.LogOutbutContacts).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((LoginActivity) getActivity()).startContactsActivity();
+                }
+            });
+
+            v.findViewById(R.id.LogOutbutSettings).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((LoginActivity) getActivity()).startSettingsActivity();
+                }
+            });
+
+
             return v;
         }
+    }
+
+    private void startMapActivity() {
+        startActivity(new Intent(this, MapActivity.class));
+    }
+
+    private void startMapNotAuthActivity() {
+        startActivity(new Intent(this, MapNotAuthActivity.class));
+    }
+
+    private void startInformationActivityy() {
+        startActivity(new Intent(this, InformationActivityy.class));
+    }
+
+    private void startSettingsActivity() {
+        startActivity(new Intent(this, SettingsActivity.class));
+    }
+
+    private void startContactsActivity() {
+        startActivity(new Intent(this, ContactsActivity.class));
     }
 }

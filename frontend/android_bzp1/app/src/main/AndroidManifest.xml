@@ -43,11 +43,7 @@
         <activity android:name="com.vk.sdk.VKServiceActivity"
             android:label="ServiceActivity"
             android:theme="@style/VK.Transparent" />
-        
-        <activity android:name=".MainActivity"
-            android:label="Main">
-        </activity>
-        
+
         <activity android:name=".InputSystemActivity"
             android:label="Вход в систему">
         </activity>
@@ -58,6 +54,18 @@
 
         <activity android:name=".MapActivity">
         </activity>
+
+        <activity android:name=".ContactsActivity"
+            android:label="Наши Контакты">
+        </activity>
+
+        <activity android:name=".SettingsActivity"
+            android:label="Настройки">
+        </activity>
+
+        <activity android:name=".MapNotAuthActivity">
+        </activity>
+
     </application>
 
 

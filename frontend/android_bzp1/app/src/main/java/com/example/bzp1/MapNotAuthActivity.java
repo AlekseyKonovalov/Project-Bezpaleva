@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +17,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import ru.yandex.yandexmapkit.*;
 import ru.yandex.yandexmapkit.overlay.Overlay;
 import ru.yandex.yandexmapkit.overlay.OverlayItem;
+import ru.yandex.yandexmapkit.overlay.balloon.BalloonItem;
 import ru.yandex.yandexmapkit.utils.*;
 
-public class MapActivity extends Activity  {
+import static ru.yandex.core.CoreApplication.getApplicationContext;
+
+public class MapNotAuthActivity extends Activity  {
     MapController mMapController;
     OverlayManager mOverlayManager;
 
@@ -39,8 +43,10 @@ public class MapActivity extends Activity  {
         // Изменяем зум
         mMapController.setZoomCurrent(14);
 
-        //add new mark
-        mOverlayManager.addOverlay(new  DialogNewMark(mMapController));
+        Toast.makeText(
+                getApplicationContext(),
+                "Авторизуйтесь, чтобы иметь больше возможностей",
+                Toast.LENGTH_SHORT).show();
 
         showObject();
     }
@@ -89,13 +95,10 @@ public class MapActivity extends Activity  {
                                 break;
                         }
                         //Create a balloon model for the object
-                        ImageBalloonItem balloonMrk = new ImageBalloonItem(mMapController, mrk.getGeoPoint());
-
-                        balloonMrk.setDescriptionOnBalloon(t.getDescription());
+                        BalloonItem balloonMrk = new BalloonItem(mMapController.getContext(), mrk.getGeoPoint());
                         balloonMrk.setText(t.getDescription());
-                        balloonMrk.setOnViewClickListener();
 
-                       // Add the balloon model to the object
+                        // Add the balloon model to the object
                         mrk.setBalloonItem(balloonMrk);
                         //Add the object to the layer
                         overlay.addOverlayItem(mrk);
@@ -118,6 +121,4 @@ public class MapActivity extends Activity  {
         });
     }
 }
-
-
 

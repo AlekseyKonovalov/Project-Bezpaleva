@@ -14,7 +14,6 @@ public class ApplicationVK extends android.app.Application {
         @Override
         public void onVKAccessTokenChanged(VKAccessToken oldToken, VKAccessToken newToken) {
             if (newToken == null) {
-                Log.i("bzp1", "113");
                 Toast.makeText(ApplicationVK.this, "AccessToken invalidated", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(ApplicationVK.this, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -26,8 +25,6 @@ public class ApplicationVK extends android.app.Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.i("bzp1", "111");
-
         try {
             vkAccessTokenTracker.startTracking();
         }
@@ -35,8 +32,6 @@ public class ApplicationVK extends android.app.Application {
             String message = e.getMessage();
             Log.i("bzp1", message);
         }
-        Log.i("bzp1", "112");
-
         try {
             VKSdk.initialize(this);
         }
@@ -44,6 +39,5 @@ public class ApplicationVK extends android.app.Application {
             String message = e.getMessage();
             Log.i("bzp1", message);
         }
-        Log.i("bzp1", "114");
     }
 }

@@ -6,15 +6,50 @@
     tools:context=".LoginActivity">
 
     <Button
-        android:id="@+id/continue_button"
-        style="@style/Button"
-        android:layout_marginTop="16dp"
-        android:text="@string/continue_using_app"/>
-
-    <Button
         android:id="@+id/logout"
         style="@style/Button"
         android:layout_marginTop="16dp"
         android:text="@string/logout"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp">>
+
+        <Button
+            android:text="Карта"
+            android:id="@+id/LogOutbutMap"
+            android:layout_width="150dp"
+            android:layout_height="130dp"
+
+            />
+        <Button
+            android:text="Настройки"
+            android:id="@+id/LogOutbutSettings"
+            android:layout_width="150dp"
+            android:layout_height="130dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:text="Справка"
+            android:id="@+id/LogOutbutInfo"
+            android:layout_width="150dp"
+            android:layout_height="130dp"
+
+            />
+        <Button
+            android:text="Контакты"
+            android:id="@+id/LogOutbutContacts"
+            android:layout_width="150dp"
+            android:layout_height="130dp"
+
+            />
+    </LinearLayout>
+
 </LinearLayout>
 
