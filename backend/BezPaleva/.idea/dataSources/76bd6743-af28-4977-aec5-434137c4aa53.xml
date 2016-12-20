@@ -82,7 +82,7 @@
       <data-type>varchar(100)|0</data-type>
     </column>
     <column id="25" parent="6" name="vk_id">
-      <data-type>int(11)|0</data-type>
+      <data-type>varchar(100)|0</data-type>
     </column>
     <key id="26" parent="6" name="PRIMARY">
       <columns>id</columns>

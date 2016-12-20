@@ -4,6 +4,10 @@
 var array=[];
 var Coords=[];
 var CoordsUpdate=[];
+var UserID="annon";
+var Time=new Date();
+Time=Time.getTime()-300000;
+
 function getColor(type) {
     var color;
     switch (type)
@@ -52,17 +56,21 @@ function init () {
 
         CoordsUpdate[0]=array[i].x;
        CoordsUpdate[1]=array[i].y;
-
-
+       // if(UserID!=array[i].user) document.getElementById('addmarker').disabled = true;
+        var curMarkID=array[i].user;
+        var changePriorityFlag=0;
         myPlacemark = new ymaps.Placemark([CoordsUpdate[0]
-            , CoordsUpdate[1]], {
+            , CoordsUpdate[1]],  {
 
+            //БАЛУН!!!!!!!!!!!!!!!!!!!!!!!!!!!
             balloonContent:
-            '<p id="x">'+CoordsUpdate[0]+
+
+            '<p id="x" style="display: none">'+CoordsUpdate[0]+
                 '</p>'+
-                    '<p id="y">'+
+                    '<p id="y" style="display: none">'+
                 CoordsUpdate[1]+
                 '</p>'+
+            '<p id="user" style="display: none">'+ curMarkID+'</p>'+
             '<h3> Описание: </h3>'+
             '<h4>'+
             array[i].description+
@@ -79,7 +87,7 @@ function init () {
 
             '</select>'+
 
-                '<label for="submit">&nbsp;</label><input class="btn btn-lg btn-info" type="submit" name="submit" id="addmarker" value="Редактировать" onclick=changeMark(document.getElementById("x").innerHTML,document.getElementById("y").innerHTML,document.getElementById("marker_balloontext2").value,document.getElementById("image2").value)>'
+                '<label for="submit">&nbsp;</label><input class="btn btn-lg btn-info" type="submit" name="submit" id="addmarker" value="Редактировать" onclick=changeMark(document.getElementById("x").innerHTML,document.getElementById("y").innerHTML,document.getElementById("marker_balloontext2").value,document.getElementById("image2").value,document.getElementById("user").innerHTML)>'
     ]
 
 
@@ -95,7 +103,7 @@ function init () {
 //3. Делаем карту кликабельной- балун представляется собой форму для ввода с кнопкой для вызова ф-ии добавления метки
     myMap.events.add('click',
         function (e) {
-        if (!myMap.balloon.isOpen()) {
+        if (!myMap.balloon.isOpen()&&(UserID!="annon")) {
             Coords = e.get('coords');
             myMap.balloon.open(Coords, {
 
@@ -125,9 +133,7 @@ function addMark (x, y,desc,type)
         getColor (type);
 
     var myPlacemark = new ymaps.Placemark([x
-        , y],{ balloonContent:  'x:'+
-        x+'  y:'+
-        y+
+        , y],{ balloonContent:
         '<h3> Описание: </h3>'+
         '<h4>'+
         desc+
@@ -144,7 +150,7 @@ function addMark (x, y,desc,type)
         photoPath: '',
         irrelevanceLevel: 999999999999,
         deathTime: 1480177654887,
-        user: 3
+        user: UserID
     };
 
     var boundary = String(Math.random()).slice(2);
@@ -159,7 +165,7 @@ function addMark (x, y,desc,type)
     body = body.join(boundaryMiddle) + boundaryLast;
     // Тело запроса готово, отправляем
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'mark?x='+x+'&y='+y+'&type='+type+'&desc='+desc+'&userId=3', true);
+    xhr.open('POST', 'mark?x='+x+'&y='+y+'&type='+type+'&desc='+desc+'&userId='+UserID, true);
     xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + boundary);
 
      xhr.onreadystatechange = function() {
@@ -173,6 +179,7 @@ function addMark (x, y,desc,type)
      }
 
     xhr.send(body);
+     //alert(xhr.responseText);
     myMap.balloon.close();
 }
 
@@ -180,67 +187,65 @@ function addMark (x, y,desc,type)
 
 ////////////////////////////////////////////////////
 
-function changeMark1(x,y,desc,type) {
-    console.log(x);
-    console.log(y);
-    console.log(desc);
-    console.log(type);
-
-
-
-}
-
-function changeMark (x, y,desc,type)
+function changeMark (x, y,desc,type,user)
 {
-    console.log("Сработал ченджмарк");
-    //console.log(x,y);
-/*
-    var color=
-        getColor (type);
-*/
-    var id=getIDfromCoords(x,y);
-    var color=getColor(getTypefromCoords());
-var myPlacemark = new ymaps.Placemark([x
-            , y],{ balloonContent:  'x:'+
-    x+'  y:'+
-    y+
-    '<h3> Описание: </h3>'+
-    '<h4>'+
-    desc+
-    '</h4>'}
-        ,{iconColor:color});
-    myMap.geoObjects.add(myPlacemark);
-    //метка на фронтенде готова
-    var data = {
-        id: id,
-        type: type,
-        description: desc,
-    };
+    //alert(user);
+    if(UserID==user) {
+        console.log("Сработал ченджмарк");
+        //console.log(x,y);
+        /*
 
-    var boundary = String(Math.random()).slice(2);
-    var boundaryMiddle = '--' + boundary + '\r\n';
-    var boundaryLast = '--' + boundary + '--\r\n'
+         var color=
+         getColor (type);
+         */
+        var id = getIDfromCoords(x, y);
+        var color = getColor(getTypefromCoords());
+        var myPlacemark = new ymaps.Placemark([x
+                , y], {
+                balloonContent: 'x:' +
+                x + '  y:' +
+                y +
+                '<h3> Описание: </h3>' +
+                '<h4>' +
+                desc +
+                '</h4>'
+            }
+            , {iconColor: color});
 
-    var body = ['\r\n'];
-    for (var key in data) {
-        // добавление поля
-        body.push('Content-Disposition: form-data; name="' + key + '"\r\n\r\n' + data[key] + '\r\n');
+        //метка на фронтенде готова
+        var data = {
+            id: id,
+            type: type,
+            description: desc,
+        };
+
+        var boundary = String(Math.random()).slice(2);
+        var boundaryMiddle = '--' + boundary + '\r\n';
+        var boundaryLast = '--' + boundary + '--\r\n'
+
+        var body = ['\r\n'];
+        for (var key in data) {
+            // добавление поля
+            body.push('Content-Disposition: form-data; name="' + key + '"\r\n\r\n' + data[key] + '\r\n');
+        }
+        body = body.join(boundaryMiddle) + boundaryLast;
+        // Тело запроса готово, отправляем
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'changeMark?' + 'id=' + id + '&desc=' + desc + '&type=' + type, true);
+        xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + boundary);
+
+        xhr.onreadystatechange = function () {
+            if (this.readyState != 4) return;
+
+            array.push(JSON.parse(xhr.responseText));
+        }
+
+        xhr.send(body);
+        myMap.geoObjects.add(myPlacemark);
+        myMap.balloon.close();
+        alert("Метка успешно отредактирована");
     }
-    body = body.join(boundaryMiddle) + boundaryLast;
-    // Тело запроса готово, отправляем
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'changeMark?'+'id='+id+'&desc='+desc+'&type='+type, true);
-    xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + boundary);
-
-     xhr.onreadystatechange = function() {
-     if (this.readyState != 4) return;
-
-         array.push(JSON.parse(xhr.responseText));
-     }
-
-    xhr.send(body);
-
-    myMap.balloon.close();
+else alert("У вас нет права редактировать чужую метку");
 }
 ////////////////////////////////////////////////////////////
 function getIDfromCoords(x,y)
@@ -270,53 +275,98 @@ function getTypefromCoords(x,y)
 
 function changePriority(x,y)
 {
-    console.log("Сработал ченджриорити");
+    var curTime=new Date();
+    curTime=curTime.getTime();
+    if(UserID!="annon") {
+        if (curTime - Time > 300000) {
 
-    var id=getIDfromCoords(x,y);
 
-    var data = {
-        id: id,
-        irrelevanceLevel: 1
+            console.log("Сработал ченджриорити");
 
-    };
+            var id = getIDfromCoords(x, y);
 
-    var boundary = String(Math.random()).slice(2);
-    var boundaryMiddle = '--' + boundary + '\r\n';
-    var boundaryLast = '--' + boundary + '--\r\n'
+            var data = {
+                id: id,
+                irrelevanceLevel: 1
 
-    var body = ['\r\n'];
-    for (var key in data) {
-        // добавление поля
-        body.push('Content-Disposition: form-data; name="' + key + '"\r\n\r\n' + data[key] + '\r\n');
+            };
+
+            var boundary = String(Math.random()).slice(2);
+            var boundaryMiddle = '--' + boundary + '\r\n';
+            var boundaryLast = '--' + boundary + '--\r\n'
+
+            var body = ['\r\n'];
+            for (var key in data) {
+                // добавление поля
+                body.push('Content-Disposition: form-data; name="' + key + '"\r\n\r\n' + data[key] + '\r\n');
+            }
+            body = body.join(boundaryMiddle) + boundaryLast;
+            // Тело запроса готово, отправляем
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'changeMark?' + 'id=' + id + '&irrel=1', true);
+            xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + boundary);
+            /*
+             xhr.onreadystatechange = function() {
+             if (this.readyState != 4) return;
+
+             console.log(JSON.parse(xhr.responseText));
+             }
+             */
+            xhr.send(body);
+
+            myMap.balloon.close();
+            Time=curTime;
+            alert("Вы понизили актуальность метки");
+        }
+        else alert("Вы уже понижали актуальность в течение 5 минут");
     }
-    body = body.join(boundaryMiddle) + boundaryLast;
-    // Тело запроса готово, отправляем
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'changeMark?'+'id='+id+'&irrel=1', true);
-    xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + boundary);
-/*
-    xhr.onreadystatechange = function() {
-        if (this.readyState != 4) return;
+    else alert("Войдите, чтобы понижать актуальность меток");
 
-        console.log(JSON.parse(xhr.responseText));
-    }
-*/
-    xhr.send(body);
-
-    myMap.balloon.close();
 }
 
 
-function test(x) {
-    VK.Auth.login();
-}
-
-function kek(str)
+function login(idVK)
 {
-    var temp= str.indexOf("?");
-    var temp2=str.indexOf("&");
-    var res = str.substring(temp+5, temp2);
-    alert(res);
+    var x = new XMLHttpRequest();
+
+    x.open("GET", 'user?vkId='+idVK, false);
+    x.send();
+
+
+    //alert(x.status);
+
+    if (x.responseText == "") {
+        //запись в нашу базу
+
+        //alert("нет");
+        var xhr2 = new XMLHttpRequest();
+
+        var body = 'fName=' + encodeURIComponent("Чувак") +
+            'lName=' + encodeURIComponent("Чуваков")+
+            'vkId=' + encodeURIComponent(idVK);
+
+        xhr2.open("POST", 'user?fName=Чувак&lName=Чуваков&vkId='+idVK, false)
+        xhr2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+        xhr2.send(body);
+        //alert(xhr2.responseText);
+       var otvet2=JSON.parse(xhr2.responseText);
+            UserID=otvet2.id;
+            alert(UserID);
+
+
+    }
+    else{
+
+        //alert("есть");
+
+        var otvet;
+
+        otvet = JSON.parse(x.responseText);
+
+        UserID = otvet.id;
+        alert(UserID);
+
+    }
 
 
 }

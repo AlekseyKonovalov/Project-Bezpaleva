@@ -26,7 +26,7 @@
 <body>
 
 
-{{2+2}}
+
 <menu></menu>
 
 <ng-view></ng-view>
@@ -36,23 +36,11 @@
         apiId: 	5770707
     });
 </script>
-
-
 <script type="text/javascript">
     VK.Widgets.Auth('vk_auth', {});
-
-    var $_GET = {};
-    var __GET = window.location.search.substring(1).split("&");
-    for(var i=0; i<__GET.length; i++) {
-        var getVar = __GET[i].split("=");
-        $_GET[getVar[0]] = typeof(getVar[1])=="undefined" ? "" : getVar[1];
-    }
-
-    console.log(location.search.substring(1));
-
-
-    //
 </script>
+
+
 
 
 <script>
@@ -60,7 +48,7 @@
     var temp= str.indexOf("?");
     var temp2=str.indexOf("&");
     var res = str.substring(temp+5, temp2);
-    if (res!="http") alert("охуенно");
+    if (res!="http" && res!="ht") login(res);
 </script>
 </body>
 

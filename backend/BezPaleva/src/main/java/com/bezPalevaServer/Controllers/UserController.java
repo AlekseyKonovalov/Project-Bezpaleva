@@ -23,11 +23,9 @@ public class UserController {
         String vkId = params.get("vkId");
 
         if (vkId == null) return null;
-        else{
-            User user = userService.getUserFromDB(vkId);
-            if (user == null) return  null;
-            else return  user;
-        }
+        else return userService.getUserFromDB(vkId);
+
+
 
     }
 
