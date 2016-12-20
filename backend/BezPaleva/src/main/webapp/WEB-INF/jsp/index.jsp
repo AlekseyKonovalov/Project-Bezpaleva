@@ -49,7 +49,18 @@
     }
 
     console.log(location.search.substring(1));
+
+
     //
+</script>
+
+
+<script>
+    var str=window.location.href;
+    var temp= str.indexOf("?");
+    var temp2=str.indexOf("&");
+    var res = str.substring(temp+5, temp2);
+    if (res!="http") alert("охуенно");
 </script>
 </body>
 

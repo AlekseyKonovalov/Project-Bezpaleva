@@ -24,7 +24,7 @@ public class UserController {
 
         if (vkId == null) return null;
         else{
-            User user = userService.getUserFromDB(Integer.parseInt(vkId));
+            User user = userService.getUserFromDB(vkId);
             if (user == null) return  null;
             else return  user;
         }
@@ -41,9 +41,8 @@ public class UserController {
         if (firstName == null || lastName == null ||vkId == null ) return null;
         else {
 
-            User user = new User(firstName, lastName, Integer.parseInt(vkId));
-            userService.addUserInBD(user);
-            return user;
+            User user = new User(firstName, lastName, vkId);
+            return userService.addUserInBD(user);
         }
     }
 }

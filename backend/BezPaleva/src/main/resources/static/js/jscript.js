@@ -307,6 +307,16 @@ function changePriority(x,y)
 }
 
 
-function test() {
+function test(x) {
     VK.Auth.login();
+}
+
+function kek(str)
+{
+    var temp= str.indexOf("?");
+    var temp2=str.indexOf("&");
+    var res = str.substring(temp+5, temp2);
+    alert(res);
+
+
 }

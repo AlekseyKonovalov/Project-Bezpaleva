@@ -17,10 +17,10 @@ public class UserService {
     public User getUserFromDB(long id){ return userRepository.findOne(id);}
 
     @Transactional
-    public User getUserFromDB(int vkId){ return userRepository.getUserByVkID(vkId);}
+    public User getUserFromDB(String vkId){ return userRepository.getUserByVkID(vkId);}
 
     @Transactional
-    public void addUserInBD(User user){ userRepository.save(user);}
+    public User addUserInBD(User user){ return userRepository.save(user);}
 
 
 }

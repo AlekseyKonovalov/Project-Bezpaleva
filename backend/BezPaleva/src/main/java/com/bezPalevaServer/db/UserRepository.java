@@ -11,5 +11,5 @@ import java.util.List;
 public interface UserRepository extends CrudRepository<User, Long> {
 
     @Query("select u from User u where vk_id = :vkID")
-    public User getUserByVkID(@Param("vkID") int vkID);
+    public User getUserByVkID(@Param("vkID") String vkID);
 }

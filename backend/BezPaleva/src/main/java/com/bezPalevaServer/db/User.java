@@ -14,14 +14,14 @@ public class User {
     private String nickname;
     private double rating;
     private String photoPath;
-    private int vkId;
+    private String vkId;
 
     @OneToMany(mappedBy = "user")
     private List<Mark> marks;
 
     public User(){}
 
-    public User( String firstName, String lastName,  int vkId) {
+    public User( String firstName, String lastName,  String vkId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.vkId = vkId;
@@ -75,11 +75,11 @@ public class User {
         this.photoPath = photoPath;
     }
 
-    public int getVkId() {
+    public String getVkId() {
         return vkId;
     }
 
-    public void setVkId(int vkId) {
+    public void setVkId(String vkId) {
         this.vkId = vkId;
     }
 }
