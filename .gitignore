@@ -16,3 +16,4 @@ backend/BezPaleva/target/maven-status/maven-compiler-plugin/compile/default-comp
 backend/BezPaleva/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
 backend/BezPaleva/target/surefire-reports/com.bezPalevaServer.BezPalevaApplicationTests.txt
 backend/BezPaleva/target/surefire-reports/TEST-com.bezPalevaServer.BezPalevaApplicationTests.xml
+backend/BezPaleva/target/*
