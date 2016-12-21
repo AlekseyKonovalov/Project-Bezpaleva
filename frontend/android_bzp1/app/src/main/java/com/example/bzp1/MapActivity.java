@@ -25,6 +25,7 @@ import ru.yandex.yandexmapkit.utils.*;
 public class MapActivity extends Activity  {
     MapController mMapController;
     OverlayManager mOverlayManager;
+    int MapUserID;
 
     @Override
     public void onBackPressed() {
@@ -35,6 +36,9 @@ public class MapActivity extends Activity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MapUserID=getIntent().getExtras().getInt("MapUserID");
+        Log.i("bzp1", Integer.toString( MapUserID));
+
         setContentView(R.layout.map_layout);
         final MapView mapView = (MapView) findViewById(R.id.map);
         mapView.showBuiltInScreenButtons(true);
@@ -64,7 +68,7 @@ public class MapActivity extends Activity  {
                         getApplicationContext(),
                         "Обновление карты",
                         Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, MapNotAuthActivity.class));
+                startActivity(new Intent(this, MapActivity.class));
                 return true;
             }
             case R.id.action_revert:{
@@ -118,7 +122,13 @@ public class MapActivity extends Activity  {
                                 break;
                         }
                         //Create a balloon model for the object
-                        ImageBalloonItem balloonMrk = new ImageBalloonItem(mMapController, mrk.getGeoPoint());
+                        ImageBalloonOverall balloonMrk;
+                        Log.i("bzp1", Integer.toString(t.getUserId()));
+                        if(t.getUserId()==MapUserID){
+                            balloonMrk = new ImageBalloonItem(mMapController, mrk.getGeoPoint());
+                        }
+                        else balloonMrk=new ImageBalloonItemAlien(mMapController, mrk.getGeoPoint());
+
 
                         balloonMrk.setDescriptionOnBalloon(t.getDescription());
                         balloonMrk.setText(t.getDescription());

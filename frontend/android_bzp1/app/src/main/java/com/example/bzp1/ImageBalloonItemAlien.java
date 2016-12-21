@@ -1,7 +1,5 @@
 package com.example.bzp1;
 
-
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,14 +13,15 @@ import ru.yandex.yandexmapkit.overlay.balloon.BalloonItem;
 import ru.yandex.yandexmapkit.overlay.balloon.OnBalloonListener;
 import ru.yandex.yandexmapkit.utils.GeoPoint;
 
-public class ImageBalloonItem extends ImageBalloonOverall{
 
+
+public class ImageBalloonItemAlien   extends ImageBalloonOverall {
     Context mContext;
     MapController mMapController;
     protected TextView textView;
     LayoutInflater inflater;
 
-    public ImageBalloonItem(MapController mMapController, GeoPoint geoPoint) {
+    public ImageBalloonItemAlien(MapController mMapController, GeoPoint geoPoint) {
         super(mMapController.getContext(), geoPoint);
         mContext = mMapController.getContext();
         this.mMapController=mMapController;
@@ -31,18 +30,17 @@ public class ImageBalloonItem extends ImageBalloonOverall{
     @Override
     public void inflateView(Context context){
         inflater = LayoutInflater.from( context );
-        model = (ViewGroup)inflater.inflate(R.layout.balloon_image_id, null);
+        model = (ViewGroup)inflater.inflate(R.layout.ballon_image_alien_id, null);
     }
 
     public void setDescriptionOnBalloon(String description){
-        TextView textView = (TextView) model.findViewById ( R.id.balloon_text_view1);
+        TextView textView = (TextView) model.findViewById ( R.id.balloon_alien_text);
         textView.setText(description);
     }
 
 
     public void setOnViewClickListener(){
-        setOnBalloonViewClickListener(R.id.balloon_images_view1, this);
-        setOnBalloonViewClickListener(R.id.balloon_images_view2, this);
+        setOnBalloonViewClickListener(R.id.balloon_alien_images, this);
     }
 
     @Override
@@ -52,12 +50,8 @@ public class ImageBalloonItem extends ImageBalloonOverall{
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
         switch (view.getId()) {
-            case R.id.balloon_images_view1:
+            case R.id.balloon_alien_images:
                 mOverlayManager.addOverlay(new DialogChangeMark(mMapController, 1));
-                break;
-            case R.id.balloon_images_view2:
-                //change mark
-                mOverlayManager.addOverlay(new DialogChangeMark(mMapController, 2));
                 break;
         }
 

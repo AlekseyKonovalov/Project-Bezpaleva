@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -216,7 +217,12 @@ public class LoginActivity extends FragmentActivity {
     }
 
     private void startMapActivity() {
-        //;
+        Log.i("bzp1", Integer.toString(user.getId()));
+        Intent intent=new Intent(this, MapActivity.class);
+
+        intent.putExtra("MapUserID", user.getId());
+        startActivity(intent);
+
     }
 
     private void startMapNotAuthActivity() {
@@ -245,6 +251,7 @@ public class LoginActivity extends FragmentActivity {
                 user.setVkId(uservk.id);
                 user.setFirstName(uservk.first_name);
                 user.setLastName(uservk.last_name);
+                user.setId(-1);
 
                 HandlerUser.compareUser(user);
 
@@ -254,7 +261,6 @@ public class LoginActivity extends FragmentActivity {
                         temp,
                         Toast.LENGTH_SHORT).show();
 
-                // update UI
             } catch (Exception e) {
             }
         }

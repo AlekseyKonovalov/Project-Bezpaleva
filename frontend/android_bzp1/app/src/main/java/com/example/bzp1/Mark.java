@@ -30,7 +30,7 @@ public class Mark{
     @SerializedName("deathTime")
     @Expose
     private long deathTime;
-    @SerializedName("userId")
+    @SerializedName("user")
     @Expose
     private int userId;
 
