@@ -80,10 +80,10 @@ function init () {
             '<h3>Редактирование</h3>'+
             ['<input class="form-control" name="balloon_text" id="marker_balloontext2" rows="5" cols="25"></input>'+
             '<select name="image" id="image2" class="form-control">'+
-            '<option value="dps">ДПС</option>',
-            '<option value="camera">Камера</option>',
-            '<option value="help">Помощь</option>',
-            '<option value="other">Другое</option>',
+            '<option value="dps">ДПС</option>'+
+            '<option value="camera">Камера</option>'+
+            '<option value="help">Помощь</option>'+
+            '<option value="other">Другое</option>'+
 
             '</select>'+
 
@@ -108,14 +108,14 @@ function init () {
             myMap.balloon.open(Coords, {
 
                 contentHeader:'Описание',
-                contentBody: ['<input class="form-control" name="balloon_text" id="marker_balloontext" rows="5" cols="25"></input>',
-                '<select name="image" id="image" class="form-control">',
-                '<option value="dps">ДПС</option>',
-                '<option value="camera">Камера</option>',
-                '<option value="help">Помощь</option>',
-                '<option value="other">Другое</option>',
+                contentBody: ['<input class="form-control" name="balloon_text" id="marker_balloontext" rows="5" cols="25"></input>'+
+                '<select name="image" id="image" class="form-control">'+
+                '<option value="dps">ДПС</option>'+
+                '<option value="camera">Камера</option>'+
+                '<option value="help">Помощь</option>'+
+                '<option value="other">Другое</option>'+
 
-                '</select>',
+                '</select>'+
 
                 '<label for="submit">&nbsp;</label><input class="btn btn-lg btn-info" type="submit" name="submit" id="addmarker" value="Добавить" onclick=addMark(Coords[0],Coords[1],document.getElementById("marker_balloontext").value,document.getElementById("image").value)>'
                 ]
@@ -351,7 +351,7 @@ function login(idVK)
         //alert(xhr2.responseText);
        var otvet2=JSON.parse(xhr2.responseText);
             UserID=otvet2.id;
-            alert(UserID);
+            //alert(UserID);
 
 
     }
@@ -364,7 +364,7 @@ function login(idVK)
         otvet = JSON.parse(x.responseText);
 
         UserID = otvet.id;
-        alert(UserID);
+        //alert(UserID);
 
     }
 
