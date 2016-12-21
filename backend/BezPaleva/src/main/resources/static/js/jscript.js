@@ -71,13 +71,12 @@ function init () {
                 CoordsUpdate[1]+
                 '</p>'+
             '<p id="user" style="display: none">'+ curMarkID+'</p>'+
-            '<h3> Описание: </h3>'+
             '<h4>'+
             array[i].description+
             '</h4>'+
-            '<label for="submit">&nbsp;</label><input class="btn btn-lg btn-info" type="submit" name="submit" id="priorityUpdater" value="Не актуально" onclick=changePriority(document.getElementById("x").innerHTML,document.getElementById("y").innerHTML)>'
-            +
-            '<h3>Редактирование</h3>'+
+            '<label for="submit">&nbsp;</label><input class="btn" type="submit" name="submit" id="priorityUpdater" value="Не актуально" onclick=changePriority(document.getElementById("x").innerHTML,document.getElementById("y").innerHTML)>'
+            +'<hr>'+
+            '<h4>Редактирование</h4>'+
             ['<input class="form-control" name="balloon_text" id="marker_balloontext2" rows="5" cols="25"></input>'+
             '<select name="image" id="image2" class="form-control">'+
             '<option value="dps">ДПС</option>'+
@@ -87,7 +86,7 @@ function init () {
 
             '</select>'+
 
-                '<label for="submit">&nbsp;</label><input class="btn btn-lg btn-info" type="submit" name="submit" id="addmarker" value="Редактировать" onclick=changeMark(document.getElementById("x").innerHTML,document.getElementById("y").innerHTML,document.getElementById("marker_balloontext2").value,document.getElementById("image2").value,document.getElementById("user").innerHTML)>'
+                '<label for="submit">&nbsp;</label><input class="btn btn-primary" type="submit" name="submit" id="addmarker" value="Редактировать" onclick=changeMark(document.getElementById("x").innerHTML,document.getElementById("y").innerHTML,document.getElementById("marker_balloontext2").value,document.getElementById("image2").value,document.getElementById("user").innerHTML)>'
     ]
 
 
@@ -117,7 +116,7 @@ function init () {
 
                 '</select>'+
 
-                '<label for="submit">&nbsp;</label><input class="btn btn-lg btn-info" type="submit" name="submit" id="addmarker" value="Добавить" onclick=addMark(Coords[0],Coords[1],document.getElementById("marker_balloontext").value,document.getElementById("image").value)>'
+                '<label for="submit">&nbsp;</label><input class="btn btn-primary" type="submit" name="submit" id="addmarker" value="Добавить" onclick=addMark(Coords[0],Coords[1],document.getElementById("marker_balloontext").value,document.getElementById("image").value)>'
                 ]
             });
         }
