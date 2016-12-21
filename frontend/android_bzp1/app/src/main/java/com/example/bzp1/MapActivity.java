@@ -1,6 +1,7 @@
 package com.example.bzp1;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,13 +26,16 @@ public class MapActivity extends Activity  {
     MapController mMapController;
     OverlayManager mOverlayManager;
 
+    @Override
+    public void onBackPressed() {
+        // TODO Auto-generated method stub
+        startActivity(new Intent(this, LoginActivity.class));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.map_layout);
-
         final MapView mapView = (MapView) findViewById(R.id.map);
         mapView.showBuiltInScreenButtons(true);
 //        mapView.showBuiltInScreenButtons(true);
@@ -41,10 +45,8 @@ public class MapActivity extends Activity  {
         mOverlayManager = mMapController.getOverlayManager();
         // Изменяем зум
         mMapController.setZoomCurrent(14);
-
         //add new mark
         mOverlayManager.addOverlay(new  DialogNewMark(mMapController));
-
         showObject();
     }
 
@@ -60,12 +62,16 @@ public class MapActivity extends Activity  {
             case R.id.action_refresh: {
                 Toast.makeText(
                         getApplicationContext(),
-                        "ТЫ нажал на рефреш карты",
+                        "Обновление карты",
                         Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, MapNotAuthActivity.class));
+                return true;
+            }
+            case R.id.action_revert:{
+                startActivity(new Intent(this, LoginActivity.class));
                 return true;
             }
         }
-
         return super.onOptionsItemSelected(item);
     }
 

@@ -10,4 +10,12 @@
         android:title="Refresh"
       />
 
+    <item
+        android:id="@+id/action_revert"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_revert"
+        android:title="Revert"
+        />
+
 </menu>

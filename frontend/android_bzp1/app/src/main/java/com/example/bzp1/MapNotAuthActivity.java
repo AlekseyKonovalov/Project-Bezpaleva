@@ -1,6 +1,7 @@
 package com.example.bzp1;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -31,11 +32,15 @@ public class MapNotAuthActivity extends AppCompatActivity {
     OverlayManager mOverlayManager;
 
     @Override
+    public void onBackPressed() {
+        // TODO Auto-generated method stub
+        startActivity(new Intent(this, LoginActivity.class));
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.map_layout);
-
         final MapView mapView = (MapView) findViewById(R.id.map);
         mapView.showBuiltInScreenButtons(true);
 //        mapView.showBuiltInScreenButtons(true);
@@ -45,12 +50,10 @@ public class MapNotAuthActivity extends AppCompatActivity {
         mOverlayManager = mMapController.getOverlayManager();
         // Изменяем зум
         mMapController.setZoomCurrent(14);
-
         Toast.makeText(
                 getApplicationContext(),
                 "Авторизуйтесь, чтобы иметь больше возможностей",
                 Toast.LENGTH_SHORT).show();
-
         showObject();
     }
 
@@ -66,16 +69,18 @@ public class MapNotAuthActivity extends AppCompatActivity {
             case R.id.action_refresh: {
                 Toast.makeText(
                         getApplicationContext(),
-                        "ТЫ нажал на рефреш карты",
+                        "Обновление карты",
                         Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, MapNotAuthActivity.class));
+                return true;
+            }
+            case R.id.action_revert:{
+                startActivity(new Intent(this, LoginActivity.class));
                 return true;
             }
         }
-
         return super.onOptionsItemSelected(item);
     }
-
-
 
     public void showObject(){
 
@@ -145,5 +150,6 @@ public class MapNotAuthActivity extends AppCompatActivity {
             }
         });
     }
+
 }
 

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -29,7 +30,7 @@ import static ru.yandex.core.CoreApplication.getActivity;
 public class LoginActivity extends FragmentActivity {
 
     private User user=new User();
-    private final static String FIELDS = "id,first_name,last_name";
+
     private static final String[] sMyScope = new String[]{
             VKScope.FRIENDS,
             VKScope.WALL,
@@ -100,7 +101,7 @@ public class LoginActivity extends FragmentActivity {
             @Override
             public void onResult(VKAccessToken res) {
                 // User passed Authorization
-                VKRequest request = VKApi.users().get(VKParameters.from(VKApiConst.FIELDS, FIELDS));
+                VKRequest request = VKApi.users().get();
                 request.executeWithListener(mRequestListener);
             }
             @Override
@@ -216,8 +217,6 @@ public class LoginActivity extends FragmentActivity {
 
     private void startMapActivity() {
         //;
-
-
     }
 
     private void startMapNotAuthActivity() {
@@ -260,7 +259,5 @@ public class LoginActivity extends FragmentActivity {
             }
         }
     };
-
-
 
 }

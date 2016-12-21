@@ -7,6 +7,7 @@
 
     <Button
         android:id="@+id/logout"
+        android:layout_height="80dp"
         style="@style/Button"
         android:layout_marginTop="16dp"
         android:text="@string/logout"/>
