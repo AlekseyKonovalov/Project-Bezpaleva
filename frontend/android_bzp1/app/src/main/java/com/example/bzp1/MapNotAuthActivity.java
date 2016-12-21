@@ -3,7 +3,11 @@ package com.example.bzp1;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -22,10 +26,9 @@ import ru.yandex.yandexmapkit.utils.*;
 
 import static ru.yandex.core.CoreApplication.getApplicationContext;
 
-public class MapNotAuthActivity extends Activity  {
+public class MapNotAuthActivity extends AppCompatActivity {
     MapController mMapController;
     OverlayManager mOverlayManager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,28 @@ public class MapNotAuthActivity extends Activity  {
 
         showObject();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.mapmenu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_refresh: {
+                Toast.makeText(
+                        getApplicationContext(),
+                        "ТЫ нажал на рефреш карты",
+                        Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
 
     public void showObject(){

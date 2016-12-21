@@ -7,19 +7,29 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKScope;
 import com.vk.sdk.VKSdk;
+import com.vk.sdk.api.VKApi;
+import com.vk.sdk.api.VKApiConst;
 import com.vk.sdk.api.VKError;
+import com.vk.sdk.api.VKParameters;
+import com.vk.sdk.api.VKRequest;
+import com.vk.sdk.api.VKResponse;
+import com.vk.sdk.api.model.VKApiUserFull;
+import com.vk.sdk.api.model.VKList;
 import com.vk.sdk.util.VKUtil;
 
+import static ru.yandex.core.CoreApplication.getActivity;
 
 
 public class LoginActivity extends FragmentActivity {
 
-
+    private User user=new User();
+    private final static String FIELDS = "id,first_name,last_name";
     private static final String[] sMyScope = new String[]{
             VKScope.FRIENDS,
             VKScope.WALL,
@@ -77,7 +87,6 @@ public class LoginActivity extends FragmentActivity {
         } else {
             showLogin();
         }
-
     }
 
     @Override
@@ -91,13 +100,12 @@ public class LoginActivity extends FragmentActivity {
             @Override
             public void onResult(VKAccessToken res) {
                 // User passed Authorization
-
+                VKRequest request = VKApi.users().get(VKParameters.from(VKApiConst.FIELDS, FIELDS));
+                request.executeWithListener(mRequestListener);
             }
-
             @Override
             public void onError(VKError error) {
                 // User didn't pass Authorization
-
             }
         };
 
@@ -207,7 +215,9 @@ public class LoginActivity extends FragmentActivity {
     }
 
     private void startMapActivity() {
-        startActivity(new Intent(this, MapActivity.class));
+        //;
+
+
     }
 
     private void startMapNotAuthActivity() {
@@ -225,4 +235,32 @@ public class LoginActivity extends FragmentActivity {
     private void startContactsActivity() {
         startActivity(new Intent(this, ContactsActivity.class));
     }
+
+    private VKRequest.VKRequestListener mRequestListener = new VKRequest.VKRequestListener() {
+        @Override
+        public void onComplete(VKResponse response) {
+            try {
+                VKList<VKApiUserFull> list = (VKList<VKApiUserFull>) response.parsedModel;
+                VKApiUserFull uservk = list.get(0);
+
+                user.setVkId(uservk.id);
+                user.setFirstName(uservk.first_name);
+                user.setLastName(uservk.last_name);
+
+                HandlerUser.compareUser(user);
+
+                String temp= "Здравствуйте, " + user.getFirstName() + " " + user.getLastName();
+                Toast.makeText(
+                        getApplicationContext(),
+                        temp,
+                        Toast.LENGTH_SHORT).show();
+
+                // update UI
+            } catch (Exception e) {
+            }
+        }
+    };
+
+
+
 }

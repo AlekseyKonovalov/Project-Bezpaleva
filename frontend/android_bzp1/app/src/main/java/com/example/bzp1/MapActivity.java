@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +48,26 @@ public class MapActivity extends Activity  {
         showObject();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.mapmenu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_refresh: {
+                Toast.makeText(
+                        getApplicationContext(),
+                        "ТЫ нажал на рефреш карты",
+                        Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     public void showObject(){
 
