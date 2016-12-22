@@ -31,6 +31,9 @@ import static ru.yandex.core.CoreApplication.getActivity;
 public class LoginActivity extends FragmentActivity {
 
     private User user=new User();
+    private int LogUserId=0;
+
+
 
     private static final String[] sMyScope = new String[]{
             VKScope.FRIENDS,
@@ -42,29 +45,35 @@ public class LoginActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
-        VKSdk.wakeUpSession(this, new VKCallback<VKSdk.LoginState>() {
-            @Override
-            public void onResult(VKSdk.LoginState res) {
-                switch (res) {
-                    case LoggedOut:
-                        showLogin();
-                        break;
-                    case LoggedIn:
-                        showLogout();
-                        break;
-                    case Pending:
-                        break;
-                    case Unknown:
-                        break;
+
+        if (savedInstanceState != null) {
+            // Restore value of members from saved state
+
+        } else {
+            setContentView(R.layout.activity_start);
+            VKSdk.wakeUpSession(this, new VKCallback<VKSdk.LoginState>() {
+                @Override
+                public void onResult(VKSdk.LoginState res) {
+                    switch (res) {
+                        case LoggedOut:
+                            showLogin();
+                            break;
+                        case LoggedIn:
+                            showLogout();
+                            break;
+                        case Pending:
+                            break;
+                        case Unknown:
+                            break;
+                    }
                 }
-            }
 
-            @Override
-            public void onError(VKError error) {
+                @Override
+                public void onError(VKError error) {
 
-            }
-        });
+                }
+            });
+        }
     }
 
     private void showLogout() {
@@ -217,7 +226,11 @@ public class LoginActivity extends FragmentActivity {
     }
 
     private void startMapActivity() {
-        Log.i("bzp1", Integer.toString(user.getId()));
+
+
+        Log.i("bzp1", "In Map " + Integer.toString(user.getId()));
+
+
         Intent intent=new Intent(this, MapActivity.class);
 
         intent.putExtra("MapUserID", user.getId());
@@ -255,6 +268,7 @@ public class LoginActivity extends FragmentActivity {
 
                 HandlerUser.compareUser(user);
 
+
                 String temp= "Здравствуйте, " + user.getFirstName() + " " + user.getLastName();
                 Toast.makeText(
                         getApplicationContext(),
@@ -265,5 +279,6 @@ public class LoginActivity extends FragmentActivity {
             }
         }
     };
+
 
 }

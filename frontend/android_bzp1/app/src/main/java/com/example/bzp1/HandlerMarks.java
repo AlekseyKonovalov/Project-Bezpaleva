@@ -28,20 +28,18 @@ public class HandlerMarks  {
         RequestBody temp1=RequestBody.create(MediaType.parse("text/plain"), tempMark.getType());
         RequestBody temp2=RequestBody.create(MediaType.parse("text/plain"),  tempMark.getDescription());
 
+        Log.i("bzp1", Double.toString(tempMark.getX()));
+        Log.i("bzp1", Double.toString( tempMark.getY()));
+        Log.i("bzp1", tempMark.getType());
+        Log.i("bzp1", tempMark.getDescription());
+        Log.i("bzp1", Integer.toString(tempMark.getUserId()));
+
         Call<Mark> call = service.createMark(tempMark.getX(), tempMark.getY(),  temp1, temp2, tempMark.getUserId(), null);
 
         call.enqueue(new Callback<Mark>() {
             @Override
             public void onResponse(Call<Mark> call, Response<Mark> response) {
                 if (response.isSuccessful()) {
-                    // request successful (status code 200, 201)
-
-                    //!!!!!1!!
-                    //рисовать метку на карте , если не пришел ответ диалоговое окно "метка не добавлена "
-
-                    //!!!!!1!!
-
-
 
                     Log.i("bzp1", "result ok");
 

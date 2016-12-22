@@ -23,8 +23,9 @@ public class DialogNewMark extends Overlay {
 
     private Mark newMark=new Mark();
 
-    public DialogNewMark(MapController mapController) {
+    public DialogNewMark(MapController mapController, int userID) {
         super(mapController);
+        newMark.setUserId(userID);
     }
 
     @Override
@@ -70,10 +71,10 @@ public class DialogNewMark extends Overlay {
                                                 int id) {
 
                                 newMark.setDescription(userInputDesc.getText().toString());
-                                newMark.setUserId(1);
+
                                 //передаем данные
                                 HandlerMarks hm=new HandlerMarks();
-                                hm.sendMark(newMark, getMapController().getContext() );
+                                hm.sendMark(newMark, getMapController().getContext());
 
                                 Toast.makeText(
                                         getApplicationContext(),

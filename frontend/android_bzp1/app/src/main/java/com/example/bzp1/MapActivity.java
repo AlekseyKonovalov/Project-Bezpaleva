@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,36 +23,19 @@ import ru.yandex.yandexmapkit.overlay.Overlay;
 import ru.yandex.yandexmapkit.overlay.OverlayItem;
 import ru.yandex.yandexmapkit.utils.*;
 
-public class MapActivity extends Activity  {
+public class MapActivity extends AppCompatActivity {
     MapController mMapController;
     OverlayManager mOverlayManager;
     int MapUserID;
 
+
+
     @Override
     public void onBackPressed() {
         // TODO Auto-generated method stub
-        startActivity(new Intent(this, LoginActivity.class));
-    }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        MapUserID=getIntent().getExtras().getInt("MapUserID");
-        Log.i("bzp1", Integer.toString( MapUserID));
-
-        setContentView(R.layout.map_layout);
-        final MapView mapView = (MapView) findViewById(R.id.map);
-        mapView.showBuiltInScreenButtons(true);
-//        mapView.showBuiltInScreenButtons(true);
-        mMapController = mapView.getMapController();
-        // determining the user's location
-        mMapController.getOverlayManager().getMyLocation().setEnabled(true);
-        mOverlayManager = mMapController.getOverlayManager();
-        // Изменяем зум
-        mMapController.setZoomCurrent(14);
-        //add new mark
-        mOverlayManager.addOverlay(new  DialogNewMark(mMapController));
-        showObject();
+        Intent intent=new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -68,7 +52,7 @@ public class MapActivity extends Activity  {
                         getApplicationContext(),
                         "Обновление карты",
                         Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, MapActivity.class));
+                startActivity(new Intent(this, MapNotAuthActivity.class));
                 return true;
             }
             case R.id.action_revert:{
@@ -78,6 +62,28 @@ public class MapActivity extends Activity  {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        MapUserID=getIntent().getExtras().getInt("MapUserID");
+
+        setContentView(R.layout.map_layout);
+        final MapView mapView = (MapView) findViewById(R.id.map);
+        mapView.showBuiltInScreenButtons(true);
+//        mapView.showBuiltInScreenButtons(true);
+        mMapController = mapView.getMapController();
+        // determining the user's location
+        mMapController.getOverlayManager().getMyLocation().setEnabled(true);
+        mOverlayManager = mMapController.getOverlayManager();
+        // Изменяем зум
+        mMapController.setZoomCurrent(14);
+        //add new mark
+        mOverlayManager.addOverlay(new  DialogNewMark(mMapController, MapUserID));
+        showObject();
+    }
+
 
     public void showObject(){
 
@@ -123,7 +129,7 @@ public class MapActivity extends Activity  {
                         }
                         //Create a balloon model for the object
                         ImageBalloonOverall balloonMrk;
-                        Log.i("bzp1", Integer.toString(t.getUserId()));
+
                         if(t.getUserId()==MapUserID){
                             balloonMrk = new ImageBalloonItem(mMapController, mrk.getGeoPoint());
                         }

@@ -31,7 +31,7 @@ public class HandlerUser  {
                 if (response.isSuccessful()) {
                     // request successful (status code 200, 201)
                     newUser.setId(response.body().getId());
-                    Log.i("bzp1", "new user " + Integer.toString(newUser.getId()));
+
 
                 } else {
                     //request not successful (like 400,401,403 etc)
@@ -61,14 +61,15 @@ public class HandlerUser  {
                 if (response.isSuccessful()) {
                     // request successful (status code 200, 201)
                     newUser.setId(response.body().getId());
-                    Log.i("bzp1", "User est " + Integer.toString(newUser.getId()));
+
+
                 } else {
                     //request not successful (like 400,401,403 etc)
                 }
             }
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Log.i("bzp1", "Usera net, sozdaem ili "+ t.getMessage());
+                Log.i("bzp1",  t.getMessage());
                 SendUser(newUser);
             }
         });

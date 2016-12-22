@@ -34,6 +34,10 @@ public class Mark{
     @Expose
     private int userId;
 
+    public Mark(){
+
+    }
+
     public double getX() {
         return x;
     }
@@ -90,29 +94,6 @@ public class Mark{
         this.userId=userId;
     }
 
-
-    public Mark(){
-
-    }
-
-    /*
-    public Mark(double x, double y, String type, String description, int userId ){
-        this.x=x;
-        this.y=y;
-        this.type=type;
-        this.description=description;
-        this.userId=userId;
-    }
-*/
-    public Mark(int id, double x, double y, String type, String description , String photoPath, int irrelevanceLevel, int deathTime, int userId){
-        this.x=x;
-        this.y=y;
-        this.type=type;
-        this.description=description;
-        this.photoPath=photoPath;
-        this.irrelevanceLevel=irrelevanceLevel;
-        this.deathTime=deathTime;
-    }
 }
 
 
