@@ -33,10 +33,12 @@ public class LoginActivity extends FragmentActivity {
 
     private User user=new User();
     private int LogUserId=0;
-    private int mapRadius=100;
-    
+    private int mapRadius=0;
+
     final String SAVED_ID = "0";
     int LOAD_ID=0;
+    final String SAVED_rad = "0";
+    int LOAD_rad=0;
     SharedPreferences sPref;
 
     private static final String[] sMyScope = new String[]{
@@ -54,19 +56,20 @@ public class LoginActivity extends FragmentActivity {
             LogUserId=getIntent().getExtras().getInt("LogUserId");
         }
         catch (Exception e){};
-
         try{
            mapRadius=getIntent().getExtras().getInt("radius");
         }
         catch (Exception e){};
-
         try{
             loadID();
             Log.i("bzp1", " loadID " + Integer.toString(LOAD_ID));
-
         }
         catch (Exception e){};
-
+        try{
+            loadRad();
+            Log.i("bzp1", " loadrd " + Integer.toString(LOAD_rad));
+        }
+        catch (Exception e){};
 
         setContentView(R.layout.activity_start);
         VKSdk.wakeUpSession(this, new VKCallback<VKSdk.LoginState>() {
@@ -245,20 +248,24 @@ public class LoginActivity extends FragmentActivity {
     }
 
     private void startMapActivity() {
-        Log.i("bzp1", "Radius  " + Integer.toString(mapRadius));
-
         if (LogUserId != 0 ){
             user.setId(LogUserId);
         } else{
-
             if(LOAD_ID !=0){
                 user.setId(LOAD_ID);
             }
         }
+        if (mapRadius==0) {
+            if (LOAD_rad != 0) {
+                mapRadius = LOAD_rad;
+            } else{
+                mapRadius=100;
+            }
+        }
 
-        Log.i("bzp1", "MapUserID  start" + Integer.toString(user.getId()));
 
         saveID(user.getId());
+        saveRad(mapRadius);
 
         Intent intent=new Intent(this, MapActivity.class);
         intent.putExtra("MapUserID", user.getId());
@@ -267,11 +274,6 @@ public class LoginActivity extends FragmentActivity {
     }
 
     private void startMapNotAuthActivity() {
-
-        Log.i("bzp1", "MapRadius  " + Integer.toString(mapRadius));
-        Log.i("bzp1", "Loadid map" + Integer.toString(LOAD_ID));
-
-
         Intent intent=new Intent(this, MapNotAuthActivity.class);
         intent.putExtra("MapRadius", mapRadius);
         startActivity(intent);
@@ -323,21 +325,29 @@ public class LoginActivity extends FragmentActivity {
         SharedPreferences.Editor ed = sPref.edit();
         ed.putString(SAVED_ID, Integer.toString(id));
         ed.commit();
-
     }
-
     private void loadID() {
         sPref = getPreferences(MODE_PRIVATE);
         String savedText = sPref.getString(SAVED_ID, "");
         LOAD_ID=Integer.parseInt(savedText);
     }
-
     private void cleanID(){
         sPref = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor ed = sPref.edit();
         ed.putString(SAVED_ID, Integer.toString(0));
         ed.commit();
     }
-//
+
+    private void saveRad(int rad) {
+        sPref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putString(SAVED_rad, Integer.toString(rad));
+        ed.commit();
+    }
+    private void loadRad() {
+        sPref = getPreferences(MODE_PRIVATE);
+        String savedText = sPref.getString(SAVED_rad, "");
+        LOAD_rad=Integer.parseInt(savedText);
+    }
 
 }

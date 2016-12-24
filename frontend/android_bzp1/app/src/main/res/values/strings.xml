@@ -10,7 +10,7 @@
     <string-array name="radlist">
         <item>100</item>
         <item>50</item>
-        <item>5</item>
+        <item>10</item>
     </string-array>
 
     <string name="spinner_title">Выбор пункта</string>

@@ -44,6 +44,7 @@ public class MapNotAuthActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         radius=getIntent().getExtras().getInt("MapRadius");
+        Log.i("bzp1", "Maprad  start" + Integer.toString( radius));
 
         setContentView(R.layout.map_layout);
         final MapView mapView = (MapView) findViewById(R.id.map);

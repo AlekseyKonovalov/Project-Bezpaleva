@@ -78,7 +78,10 @@ public class MapActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         MapUserID=getIntent().getExtras().getInt("MapUserID");
         radius=getIntent().getExtras().getInt("MapRadius");
+
+
         Log.i("bzp1", "MapUserID  start" + Integer.toString(MapUserID));
+        Log.i("bzp1", "Maprad  start" + Integer.toString( radius));
         setContentView(R.layout.map_layout);
         final MapView mapView = (MapView) findViewById(R.id.map);
         mapView.showBuiltInScreenButtons(true);
