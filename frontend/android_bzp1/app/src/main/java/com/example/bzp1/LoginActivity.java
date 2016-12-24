@@ -1,6 +1,7 @@
 package com.example.bzp1;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -32,8 +33,11 @@ public class LoginActivity extends FragmentActivity {
 
     private User user=new User();
     private int LogUserId=0;
-
-
+    private int mapRadius=100;
+    
+    final String SAVED_ID = "0";
+    int LOAD_ID=0;
+    SharedPreferences sPref;
 
     private static final String[] sMyScope = new String[]{
             VKScope.FRIENDS,
@@ -46,34 +50,48 @@ public class LoginActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (savedInstanceState != null) {
-            // Restore value of members from saved state
+        try{
+            LogUserId=getIntent().getExtras().getInt("LogUserId");
+        }
+        catch (Exception e){};
 
-        } else {
-            setContentView(R.layout.activity_start);
-            VKSdk.wakeUpSession(this, new VKCallback<VKSdk.LoginState>() {
-                @Override
-                public void onResult(VKSdk.LoginState res) {
-                    switch (res) {
-                        case LoggedOut:
-                            showLogin();
-                            break;
-                        case LoggedIn:
-                            showLogout();
-                            break;
-                        case Pending:
-                            break;
-                        case Unknown:
-                            break;
+        try{
+           mapRadius=getIntent().getExtras().getInt("radius");
+        }
+        catch (Exception e){};
+
+        try{
+            loadID();
+            Log.i("bzp1", " loadID " + Integer.toString(LOAD_ID));
+
+        }
+        catch (Exception e){};
+
+
+        setContentView(R.layout.activity_start);
+        VKSdk.wakeUpSession(this, new VKCallback<VKSdk.LoginState>() {
+            @Override
+            public void onResult(VKSdk.LoginState res) {
+                switch (res) {
+                    case LoggedOut:
+                        showLogin();
+                        break;
+                    case LoggedIn:
+                        showLogout();
+                        break;
+                    case Pending:
+                        break;
+                    case Unknown:
+                        break;
                     }
                 }
 
-                @Override
-                public void onError(VKError error) {
+            @Override
+            public void onError(VKError error) {
 
-                }
-            });
-        }
+            }
+        });
+
     }
 
     private void showLogout() {
@@ -185,6 +203,7 @@ public class LoginActivity extends FragmentActivity {
                 @Override
                 public void onClick(View view) {
                     VKSdk.logout();
+                    ((LoginActivity) getActivity()).cleanID();
                     if (!VKSdk.isLoggedIn()) {
                         ((LoginActivity) getActivity()).showLogin();
                     }
@@ -226,20 +245,36 @@ public class LoginActivity extends FragmentActivity {
     }
 
     private void startMapActivity() {
+        Log.i("bzp1", "Radius  " + Integer.toString(mapRadius));
 
+        if (LogUserId != 0 ){
+            user.setId(LogUserId);
+        } else{
 
-        Log.i("bzp1", "In Map " + Integer.toString(user.getId()));
+            if(LOAD_ID !=0){
+                user.setId(LOAD_ID);
+            }
+        }
 
+        Log.i("bzp1", "MapUserID  start" + Integer.toString(user.getId()));
+
+        saveID(user.getId());
 
         Intent intent=new Intent(this, MapActivity.class);
-
         intent.putExtra("MapUserID", user.getId());
+        intent.putExtra("MapRadius", mapRadius);
         startActivity(intent);
-
     }
 
     private void startMapNotAuthActivity() {
-        startActivity(new Intent(this, MapNotAuthActivity.class));
+
+        Log.i("bzp1", "MapRadius  " + Integer.toString(mapRadius));
+        Log.i("bzp1", "Loadid map" + Integer.toString(LOAD_ID));
+
+
+        Intent intent=new Intent(this, MapNotAuthActivity.class);
+        intent.putExtra("MapRadius", mapRadius);
+        startActivity(intent);
     }
 
     private void startInformationActivityy() {
@@ -247,7 +282,10 @@ public class LoginActivity extends FragmentActivity {
     }
 
     private void startSettingsActivity() {
-        startActivity(new Intent(this, SettingsActivity.class));
+
+        Intent intent=new Intent(this, SettingsActivity.class);
+        intent.putExtra("radius", mapRadius);
+        startActivity(intent);
     }
 
     private void startContactsActivity() {
@@ -280,5 +318,26 @@ public class LoginActivity extends FragmentActivity {
         }
     };
 
+    private void saveID(int id) {
+        sPref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putString(SAVED_ID, Integer.toString(id));
+        ed.commit();
+
+    }
+
+    private void loadID() {
+        sPref = getPreferences(MODE_PRIVATE);
+        String savedText = sPref.getString(SAVED_ID, "");
+        LOAD_ID=Integer.parseInt(savedText);
+    }
+
+    private void cleanID(){
+        sPref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putString(SAVED_ID, Integer.toString(0));
+        ed.commit();
+    }
+//
 
 }

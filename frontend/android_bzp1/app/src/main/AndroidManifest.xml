@@ -47,7 +47,7 @@
         <activity android:name=".InputSystemActivity"
             android:label="Вход в систему">
         </activity>
-        
+
         <activity android:name=".InformationActivityy"
             android:label="Справка">
         </activity>

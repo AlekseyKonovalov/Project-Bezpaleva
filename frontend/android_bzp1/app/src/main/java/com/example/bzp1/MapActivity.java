@@ -26,15 +26,17 @@ import ru.yandex.yandexmapkit.utils.*;
 public class MapActivity extends AppCompatActivity {
     MapController mMapController;
     OverlayManager mOverlayManager;
-    int MapUserID;
-
+    private int MapUserID;
+    private int radius;
 
 
     @Override
     public void onBackPressed() {
         // TODO Auto-generated method stub
 
-        Intent intent=new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.putExtra("LogUserId",MapUserID);
+        intent.putExtra("radius", radius);
         startActivity(intent);
     }
 
@@ -52,11 +54,18 @@ public class MapActivity extends AppCompatActivity {
                         getApplicationContext(),
                         "Обновление карты",
                         Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, MapNotAuthActivity.class));
+
+                Intent intent=new Intent(this, MapActivity.class);
+                intent.putExtra("MapUserID",MapUserID);
+                intent.putExtra("MapRadius", radius);
+                startActivity(intent);
                 return true;
             }
             case R.id.action_revert:{
-                startActivity(new Intent(this, LoginActivity.class));
+                Intent intent = new Intent(this, LoginActivity.class);
+                intent.putExtra("LogUserId",MapUserID);
+                intent.putExtra("radius", radius);
+                startActivity(intent);
                 return true;
             }
         }
@@ -68,7 +77,8 @@ public class MapActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MapUserID=getIntent().getExtras().getInt("MapUserID");
-
+        radius=getIntent().getExtras().getInt("MapRadius");
+        Log.i("bzp1", "MapUserID  start" + Integer.toString(MapUserID));
         setContentView(R.layout.map_layout);
         final MapView mapView = (MapView) findViewById(R.id.map);
         mapView.showBuiltInScreenButtons(true);

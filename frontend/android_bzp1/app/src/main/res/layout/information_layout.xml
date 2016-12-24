@@ -9,16 +9,96 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
-            android:text="@string/about_text"
+            android:text="Легенда карты : "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
             />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:text="Пост ДПС"
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/dps"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:text="Камера"
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/camera"
+                />
+        </LinearLayout>
+        <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:text="Помощь"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/help"
+            />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:text="Другое"
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/other"
+                />
+        </LinearLayout>
+
+
     </LinearLayout>
 
 </LinearLayout>

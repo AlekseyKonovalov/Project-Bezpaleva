@@ -6,4 +6,13 @@
         Все кто хотят открывать филиалы нашей группы,пишите администраторам
         о заявке в вступление в сеть групп Bezpaleva174rus .</string>
     <integer name="com_vk_sdk_AppId">5786033</integer>
+
+    <string-array name="radlist">
+        <item>100</item>
+        <item>50</item>
+        <item>5</item>
+    </string-array>
+
+    <string name="spinner_title">Выбор пункта</string>
+
 </resources>

@@ -30,16 +30,21 @@ import static ru.yandex.core.CoreApplication.getApplicationContext;
 public class MapNotAuthActivity extends AppCompatActivity {
     MapController mMapController;
     OverlayManager mOverlayManager;
+    private int radius;
 
     @Override
     public void onBackPressed() {
         // TODO Auto-generated method stub
-        startActivity(new Intent(this, LoginActivity.class));
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.putExtra("radius", radius);
+        startActivity(intent);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        radius=getIntent().getExtras().getInt("MapRadius");
+
         setContentView(R.layout.map_layout);
         final MapView mapView = (MapView) findViewById(R.id.map);
         mapView.showBuiltInScreenButtons(true);
@@ -71,11 +76,15 @@ public class MapNotAuthActivity extends AppCompatActivity {
                         getApplicationContext(),
                         "Обновление карты",
                         Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, MapNotAuthActivity.class));
+                Intent intent = new Intent(this, MapNotAuthActivity.class);
+                intent.putExtra("MapRadius", radius);
+                startActivity(intent);
                 return true;
             }
             case R.id.action_revert:{
-                startActivity(new Intent(this, LoginActivity.class));
+                Intent intent = new Intent(this, LoginActivity.class);
+                intent.putExtra("radius", radius);
+                startActivity(intent);
                 return true;
             }
         }
