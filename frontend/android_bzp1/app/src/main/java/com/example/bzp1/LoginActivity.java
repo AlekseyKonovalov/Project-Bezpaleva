@@ -33,13 +33,13 @@ public class LoginActivity extends FragmentActivity {
 
     private User user=new User();
     private int LogUserId=0;
-    private int mapRadius=0;
+    private int mapRadius=100;
 
     final String SAVED_ID = "0";
     int LOAD_ID=0;
-    final String SAVED_rad = "0";
-    int LOAD_rad=0;
+
     SharedPreferences sPref;
+
 
     private static final String[] sMyScope = new String[]{
             VKScope.FRIENDS,
@@ -58,17 +58,14 @@ public class LoginActivity extends FragmentActivity {
         catch (Exception e){};
         try{
            mapRadius=getIntent().getExtras().getInt("radius");
+
         }
         catch (Exception e){};
         try{
             loadID();
             Log.i("bzp1", " loadID " + Integer.toString(LOAD_ID));
         }
-        catch (Exception e){};
-        try{
-            loadRad();
-            Log.i("bzp1", " loadrd " + Integer.toString(LOAD_rad));
-        }
+
         catch (Exception e){};
 
         setContentView(R.layout.activity_start);
@@ -248,24 +245,18 @@ public class LoginActivity extends FragmentActivity {
     }
 
     private void startMapActivity() {
-        if (LogUserId != 0 ){
-            user.setId(LogUserId);
-        } else{
-            if(LOAD_ID !=0){
-                user.setId(LOAD_ID);
-            }
-        }
-        if (mapRadius==0) {
-            if (LOAD_rad != 0) {
-                mapRadius = LOAD_rad;
-            } else{
-                mapRadius=100;
-            }
-        }
 
+        if(user.getId()==0) {
+            if (LogUserId != 0) {
+                user.setId(LogUserId);
+            } else {
+                if (LOAD_ID != 0) {
+                    user.setId(LOAD_ID);
+                }
+            }
+        }
 
         saveID(user.getId());
-        saveRad(mapRadius);
 
         Intent intent=new Intent(this, MapActivity.class);
         intent.putExtra("MapUserID", user.getId());
@@ -336,18 +327,6 @@ public class LoginActivity extends FragmentActivity {
         SharedPreferences.Editor ed = sPref.edit();
         ed.putString(SAVED_ID, Integer.toString(0));
         ed.commit();
-    }
-
-    private void saveRad(int rad) {
-        sPref = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor ed = sPref.edit();
-        ed.putString(SAVED_rad, Integer.toString(rad));
-        ed.commit();
-    }
-    private void loadRad() {
-        sPref = getPreferences(MODE_PRIVATE);
-        String savedText = sPref.getString(SAVED_rad, "");
-        LOAD_rad=Integer.parseInt(savedText);
     }
 
 }

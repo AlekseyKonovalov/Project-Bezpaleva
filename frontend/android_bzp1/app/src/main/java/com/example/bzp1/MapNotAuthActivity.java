@@ -101,7 +101,7 @@ public class MapNotAuthActivity extends AppCompatActivity {
                 .build();
 
         MarksAPIget service = retrofit.create(MarksAPIget.class);
-        Call<List<Mark>> call = service.getMarks();
+        Call<List<Mark>> call = service.getMarks(55.177635, 61.331487, radius);
 
         call.enqueue(new Callback<List<Mark>>() {
             @Override
