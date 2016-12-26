@@ -108,7 +108,8 @@ public class DialogNewMark extends Overlay {
                                         mrk = new OverlayItem(new GeoPoint(newMark.getX(), newMark.getY()),  res.getDrawable(R.drawable.other));
                                         break;
                                 }
-                                ImageBalloonItem balloonMrk = new ImageBalloonItem(getMapController(), mrk.getGeoPoint());
+                                //!
+                                ImageBalloonItem balloonMrk = new ImageBalloonItem(getMapController(), mrk.getGeoPoint(), 0);
 
                                 balloonMrk.setDescriptionOnBalloon(newMark.getDescription());
                                 balloonMrk.setText(newMark.getDescription());

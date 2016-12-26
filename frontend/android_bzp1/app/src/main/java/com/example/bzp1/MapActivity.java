@@ -144,9 +144,9 @@ public class MapActivity extends AppCompatActivity {
                         ImageBalloonOverall balloonMrk;
 
                         if(t.getUserId()==MapUserID){
-                            balloonMrk = new ImageBalloonItem(mMapController, mrk.getGeoPoint());
+                            balloonMrk = new ImageBalloonItem(mMapController, mrk.getGeoPoint(), t.getId());
                         }
-                        else balloonMrk=new ImageBalloonItemAlien(mMapController, mrk.getGeoPoint());
+                        else balloonMrk=new ImageBalloonItemAlien(mMapController, mrk.getGeoPoint(), t.getId());
 
 
                         balloonMrk.setDescriptionOnBalloon(t.getDescription());

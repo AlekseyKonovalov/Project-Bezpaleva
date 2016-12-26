@@ -16,10 +16,16 @@ import ru.yandex.yandexmapkit.overlay.OverlayItem;
 import ru.yandex.yandexmapkit.utils.GeoPoint;
 
 import static ru.yandex.core.CoreApplication.getApplicationContext;
+import static ru.yandex.core.CoreApplication.quitEventLoop;
 
 public class DialogChangeMark extends Overlay{
-    public DialogChangeMark(MapController mapController, int typeChange) {
+
+    int idMark;
+  //  Mark newMark;
+
+    public DialogChangeMark(MapController mapController, int typeChange, int idMark) {
         super(mapController);
+        this.idMark=idMark;
         switch (typeChange) {
             case 1:
                 buildDialogChangeMarkIrrelevanceLevel();
@@ -32,7 +38,8 @@ public class DialogChangeMark extends Overlay{
     private void buildDialogChangeMarkParameters(){
         final String[] mChooseTypes = {"Пост ДПС", "Камера", "Help", "Другое"};
         final String[] mChooseTypesMark = {"dps", "camera", "help", "other"};
-
+       // newMark= new Mark();
+      //  newMark.setId(idMark);
         //Получаем вид с файла prompt.xml, который применим для диалогового окна:
 
         LayoutInflater li = LayoutInflater.from(getMapController().getContext());
@@ -53,7 +60,7 @@ public class DialogChangeMark extends Overlay{
                                         "Вы выбрали тип метки: "
                                                 + mChooseTypes[item],
                                         Toast.LENGTH_SHORT).show();
-                              //  newMark.setType(mChooseTypesMark[item]);
+                                //newMark.setType(mChooseTypesMark[item]);
                             }
                         })
 
@@ -65,10 +72,10 @@ public class DialogChangeMark extends Overlay{
                             public void onClick(DialogInterface dialog,
                                                 int id) {
 
-                           //     newMark.setDescription(userInputDesc.getText().toString());
-                            //    newMark.setUserId(1);
+                             //   newMark.setDescription(userInputDesc.getText().toString());
+                                // newMark.setUserId(1);
                                 //передаем данные
-                          //      HandlerMarks hm=new HandlerMarks();
+                           //     HandlerMarks hm=new HandlerMarks();
                            //     hm.sendMark(newMark, getMapController().getContext() );
 
                                 Toast.makeText(
@@ -103,6 +110,8 @@ public class DialogChangeMark extends Overlay{
                             @Override
                             public void onClick(DialogInterface dialog,
                                                 int id) {
+                                HandlerMarks hm=new HandlerMarks();
+                                hm.changeIrrelevanceLevel(idMark, getMapController().getContext());
 
                                 Toast.makeText(
                                         getApplicationContext(),

@@ -7,7 +7,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface MarksAPIget {
-    @GET("/mark?x=55.177635&y=61.331487&rad=10000")
+    @GET("/mark?")
     Call<List<Mark>> getMarks(@Query("x") double x, @Query("y") double y, @Query("rad")int rad);
 }
 
