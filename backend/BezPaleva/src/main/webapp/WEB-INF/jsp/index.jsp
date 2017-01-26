@@ -23,7 +23,7 @@
     <script src="https://vk.com/js/api/openapi.js?136" type="text/javascript"></script>
 
 </head>
-<body>
+<body class="black">
 
 
 

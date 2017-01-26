@@ -35,6 +35,7 @@ a.btn {
 
 /* blue button */
 
+
 a.btn.btn-blue {
 	background-color: #699DB6;
 	border-color: rgba(0,0,0,0.3);
@@ -42,15 +43,15 @@ a.btn.btn-blue {
 	color: #FFF;
 }
 
-	a.btn.btn-blue:hover {
-		background-color: #4F87A2;
-		border-color: rgba(0,0,0,0.5);
-	}
-	
-	a.btn.btn-blue:active {
-		background-color: #3C677B;
-		border-color: rgba(0,0,0,0.9);
-	}
+a.btn.btn-blue:hover {
+	background-color: #4F87A2;
+	border-color: rgba(0,0,0,0.5);
+}
+
+a.btn.btn-blue:active {
+	background-color: #3C677B;
+	border-color: rgba(0,0,0,0.9);
+}
 
 /* red button */
 
@@ -86,3 +87,5 @@ a.btn.btn-red {
 .box div{width:90px;display:inline-block;border:1px solid black}
 
 .center_contacts{margin-top: 100px; width: 10%; margin-left: 45%}
+.black{  background-color: RGB(0, 0, 0);
+}
