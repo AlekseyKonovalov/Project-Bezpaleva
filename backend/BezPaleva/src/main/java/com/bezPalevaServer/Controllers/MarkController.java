@@ -1,7 +1,6 @@
 package com.bezPalevaServer.Controllers;
 
 import com.bezPalevaServer.Services.MarkService;
-import com.bezPalevaServer.Services.MarksScheduler;
 import com.bezPalevaServer.Services.SystemParameters;
 import com.bezPalevaServer.Services.UserService;
 import com.bezPalevaServer.db.Mark;
@@ -54,16 +53,23 @@ public class MarkController {
 
         if(x == null || y == null || type == null || userId == null) return  null;
         else {
-            Calendar deathTime = Calendar.getInstance();
-            deathTime.add(Calendar.HOUR, systemParameters.getDeathTimeSize());
 
             User user = userService.getUserFromDB(Long.parseLong(userId));
 
-            Mark mark = new Mark(Double.parseDouble(x), Double.parseDouble(y), type, description, deathTime.getTimeInMillis(), user);
+            if(user.getNumberMarksPerDay() <= systemParameters.getMaxNumberMarksPerDay()) {
 
-            if(photoFile != null) markService.createPhotoFile(photoFile, mark, null);
+                user.incNumberMarksPerDay();
 
-            return markService.addMarkInDB(mark);
+                Calendar deathTime = Calendar.getInstance();
+                deathTime.add(Calendar.HOUR, systemParameters.getDeathTimeSize());
+
+                Mark mark = new Mark(Double.parseDouble(x), Double.parseDouble(y), type, description, deathTime.getTimeInMillis(), user);
+
+                if (photoFile != null) markService.createPhotoFile(photoFile, mark, null);
+
+                return markService.addMarkInDB(mark);
+            }
+            else return null;
         }
     }
 

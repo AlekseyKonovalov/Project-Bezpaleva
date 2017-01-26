@@ -1,8 +1,14 @@
-com\bezPalevaServer\Services\MarkService.class
+com\bezPalevaServer\Controllers\AdminController.class
 com\bezPalevaServer\Services\SystemParameters.class
 com\bezPalevaServer\Controllers\IndexController.class
 com\bezPalevaServer\Controllers\MarkController.class
+com\bezPalevaServer\Services\Scheduler.class
+com\bezPalevaServer\Services\MarksScheduler.class
+com\bezPalevaServer\db\User.class
+com\bezPalevaServer\Services\UserService.class
+com\bezPalevaServer\Services\MarkService.class
+com\bezPalevaServer\Controllers\UserController.class
+com\bezPalevaServer\db\UserRepository.class
 com\bezPalevaServer\db\MarkRepository.class
 com\bezPalevaServer\BezPalevaApplication.class
-com\bezPalevaServer\Services\MarksScheduler.class
 com\bezPalevaServer\db\Mark.class

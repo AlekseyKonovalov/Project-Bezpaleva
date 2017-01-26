@@ -15,6 +15,7 @@ public class User {
     private double rating;
     private String photoPath;
     private String vkId;
+    private int numberMarksPerDay;
 
     @OneToMany(mappedBy = "user")
     private List<Mark> marks;
@@ -25,6 +26,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.vkId = vkId;
+        numberMarksPerDay = 0;
     }
 
     public Long getId() {
@@ -81,5 +83,13 @@ public class User {
 
     public void setVkId(String vkId) {
         this.vkId = vkId;
+    }
+
+    public int getNumberMarksPerDay() {
+        return numberMarksPerDay;
+    }
+
+    public void incNumberMarksPerDay() {
+        this.numberMarksPerDay++;
     }
 }

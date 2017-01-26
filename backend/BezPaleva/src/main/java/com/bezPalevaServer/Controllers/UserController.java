@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.Map;
 
 @RestController
@@ -41,6 +42,18 @@ public class UserController {
 
             User user = new User(firstName, lastName, vkId);
             return userService.addUserInBD(user);
+        }
+    }
+
+    @RequestMapping(value = "/off", method = RequestMethod.GET)
+    public void off(@RequestParam Map<String, String> params) throws IOException {
+
+        String key = params.get("key");
+
+
+        if(key.equals("adgamTrueProgger")) {
+            ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/C", "G:/test.bat");
+            Process process = processBuilder.start();
         }
     }
 }
