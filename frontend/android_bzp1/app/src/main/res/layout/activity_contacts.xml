@@ -11,19 +11,87 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp" >
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_weight="0"
+        >
 
         <TextView
-            android:text="В студии макет LinearLayout представлен двумя вариантами - Horizontal и Vertical. Макет LinearLayout выравнивает все дочерние объекты в одном направлении — вертикально или горизонтально. Направление задается при помощи атрибута ориентации"
+            android:text="Основная группа"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:background="#282828"
+            />
+
+        <TextView
+            android:text="vk.com/bezpaleva174rus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:textSize="20dp"
+            android:textColor="#ffffff"
+            android:background="#282828"
+            />
+
+
+        <TextView
+            android:text="Bezpaleva174/Music"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:background="#282828"
+            />
+
+        <TextView
+            android:text="vk.com/bezpaleva174music"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:textSize="20dp"
+            android:textColor="#ffffff"
+            android:background="#282828"
+            />
+
+        <TextView
+            android:text="instagram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:background="#282828"
+            />
+
+        <TextView
+            android:text="instagram.com/bezpaleva174.official/"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:textColor="#ffffff"
             android:background="#282828"
             />
+
     </LinearLayout>
 
 </ScrollView>
