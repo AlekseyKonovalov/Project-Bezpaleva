@@ -23,13 +23,18 @@ import ru.yandex.yandexmapkit.*;
 import ru.yandex.yandexmapkit.overlay.Overlay;
 import ru.yandex.yandexmapkit.overlay.OverlayItem;
 import ru.yandex.yandexmapkit.overlay.balloon.BalloonItem;
+import ru.yandex.yandexmapkit.overlay.location.MyLocationItem;
+import ru.yandex.yandexmapkit.overlay.location.OnMyLocationListener;
 import ru.yandex.yandexmapkit.utils.*;
 
 import static ru.yandex.core.CoreApplication.getApplicationContext;
 
-public class MapNotAuthActivity extends AppCompatActivity {
+
+public class MapNotAuthActivity extends AppCompatActivity implements OnMyLocationListener {
+
     MapController mMapController;
     OverlayManager mOverlayManager;
+    MyLocationItem myLocationItem;
     private int radius;
 
     @Override
@@ -54,13 +59,16 @@ public class MapNotAuthActivity extends AppCompatActivity {
         // determining the user's location
         mMapController.getOverlayManager().getMyLocation().setEnabled(true);
         mOverlayManager = mMapController.getOverlayManager();
+        mMapController.getOverlayManager().getMyLocation().addMyLocationListener(this);
         // Изменяем зум
         mMapController.setZoomCurrent(14);
+
         Toast.makeText(
                 getApplicationContext(),
                 "Авторизуйтесь, чтобы иметь больше возможностей",
                 Toast.LENGTH_SHORT).show();
-        showObject();
+
+        //showObject();
     }
 
     @Override
@@ -92,16 +100,37 @@ public class MapNotAuthActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void showObject(){
 
-        String webServiceUrl="http://88.205.135.253:8080";
+    @Override
+    public void onMyLocationChange(MyLocationItem myLocationItem) {
+        this.myLocationItem = myLocationItem;
+        int flag=0;
+        while (flag==0){
+            try{
+                showObject(myLocationItem.getGeoPoint().getLat(), myLocationItem.getGeoPoint().getLon());
+                flag=1;
+                break;
+            }
+            catch (Exception e){
+                Log.i("bzp1", "catch");
+            }
+        }
+
+    }
+
+    public void showObject(double x, double y){
+
+        String webServiceUrl="http://88.205.135.253:80";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(webServiceUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         MarksAPIget service = retrofit.create(MarksAPIget.class);
-        Call<List<Mark>> call = service.getMarks(55.177635, 61.331487, radius);
+
+        Call<List<Mark>> call = service.getMarks(x , y , radius);
+        Log.i("bzp1", Double.toString(x ));
+        Log.i("bzp1", Double.toString(y ));
 
         call.enqueue(new Callback<List<Mark>>() {
             @Override

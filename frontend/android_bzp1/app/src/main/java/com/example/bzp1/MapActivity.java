@@ -21,11 +21,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import ru.yandex.yandexmapkit.*;
 import ru.yandex.yandexmapkit.overlay.Overlay;
 import ru.yandex.yandexmapkit.overlay.OverlayItem;
+import ru.yandex.yandexmapkit.overlay.location.MyLocationItem;
+import ru.yandex.yandexmapkit.overlay.location.OnMyLocationListener;
 import ru.yandex.yandexmapkit.utils.*;
 
-public class MapActivity extends AppCompatActivity {
+public class MapActivity extends AppCompatActivity  implements OnMyLocationListener {
+
     MapController mMapController;
     OverlayManager mOverlayManager;
+    MyLocationItem myLocationItem;
     private int MapUserID;
     private int radius;
 
@@ -79,40 +83,67 @@ public class MapActivity extends AppCompatActivity {
         MapUserID=getIntent().getExtras().getInt("MapUserID");
         radius=getIntent().getExtras().getInt("MapRadius");
 
-
         Log.i("bzp1", "MapUserID  start" + Integer.toString(MapUserID));
         Log.i("bzp1", "Maprad  start" + Integer.toString( radius));
+
         setContentView(R.layout.map_layout);
         final MapView mapView = (MapView) findViewById(R.id.map);
         mapView.showBuiltInScreenButtons(true);
 //        mapView.showBuiltInScreenButtons(true);
         mMapController = mapView.getMapController();
         // determining the user's location
+
         mMapController.getOverlayManager().getMyLocation().setEnabled(true);
+        myLocationItem=mMapController.getOverlayManager().getMyLocation().getMyLocationItem();
+
         mOverlayManager = mMapController.getOverlayManager();
         // Изменяем зум
         mMapController.setZoomCurrent(14);
+
         //add new mark
         mOverlayManager.addOverlay(new  DialogNewMark(mMapController, MapUserID));
-        showObject();
+
+        mMapController.getOverlayManager().getMyLocation().addMyLocationListener(this);
+
+        //showObject();
     }
 
 
-    public void showObject(){
+    @Override
+    public void onMyLocationChange(MyLocationItem myLocationItem) {
+        this.myLocationItem = myLocationItem;
+        int flag=0;
+        while (flag==0){
+            try{
+                showObject(myLocationItem.getGeoPoint().getLat(), myLocationItem.getGeoPoint().getLon());
+                flag=1;
+                break;
+            }
+            catch (Exception e){
+                Log.i("bzp1", "catch");
+            }
+        }
+    }
 
-        String webServiceUrl="http://88.205.135.253:8080";
+
+    public void showObject(double x, double y){
+
+        String webServiceUrl="http://88.205.135.253:80";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(webServiceUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         MarksAPIget service = retrofit.create(MarksAPIget.class);
-        Call<List<Mark>> call = service.getMarks(55.177635, 61.331487, radius);
+
+        Call<List<Mark>> call = service.getMarks(x, y, radius);
+        Log.i("bzp1", Double.toString(x ));
+        Log.i("bzp1", Double.toString(y ));
 
         call.enqueue(new Callback<List<Mark>>() {
             @Override
             public void onResponse(Call<List<Mark>> call, Response<List<Mark>> response) {
-
+                Log.i("bzp1", "result ok");
                 if (response.isSuccessful()) {
                     // request successful (status code 200, 201)
                     List<Mark> result = response.body();
@@ -153,7 +184,7 @@ public class MapActivity extends AppCompatActivity {
                         balloonMrk.setText(t.getDescription());
                         balloonMrk.setOnViewClickListener();
 
-                       // Add the balloon model to the object
+                        // Add the balloon model to the object
                         mrk.setBalloonItem(balloonMrk);
                         //Add the object to the layer
                         overlay.addOverlayItem(mrk);
@@ -175,6 +206,8 @@ public class MapActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
 
 

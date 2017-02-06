@@ -84,7 +84,7 @@ public class DialogNewMark extends Overlay {
                                 //сразу добавим метку на карту
 
                                 //ОСТОРОЖНО ДУБЛЯЖ КОДА С MAPACTIVITY с метода ShowObjects !!!!!!
-
+                                /*
                                 Resources res = getMapController().getContext().getResources();
                                 Overlay overlay = new Overlay(getMapController());
 
@@ -121,6 +121,7 @@ public class DialogNewMark extends Overlay {
                                 overlay.addOverlayItem(mrk);
                                 // Add the layer to the map
                                 mOverlayManager.addOverlay(overlay);
+                                */
                             }
                         })
 
