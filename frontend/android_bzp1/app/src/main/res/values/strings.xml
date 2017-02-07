@@ -10,6 +10,7 @@
     <integer name="com_vk_sdk_AppId">5786033</integer>
 
     <string-array name="radlist">
+        <item>250</item>
         <item>100</item>
         <item>50</item>
         <item>10</item>

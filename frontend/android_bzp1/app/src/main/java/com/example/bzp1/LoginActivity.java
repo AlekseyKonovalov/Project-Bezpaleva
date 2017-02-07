@@ -60,7 +60,9 @@ public class LoginActivity extends FragmentActivity {
            mapRadius=getIntent().getExtras().getInt("radius");
 
         }
-        catch (Exception e){};
+        catch (Exception e){
+            mapRadius=100;
+        };
         try{
             loadID();
             Log.i("bzp1", " loadID " + Integer.toString(LOAD_ID));
