@@ -30,7 +30,7 @@ public class DialogNewMark extends Overlay {
 
     @Override
     public boolean onLongPress(float x, float y) {
-        final String[] mChooseTypes = {"Пост ДПС", "Камера", "Help", "Другое"};
+        final String[] mChooseTypes = {"Патруль", "Камера", "Help", "Другое"};
         final String[] mChooseTypesMark = {"dps", "camera", "help", "other"};
 
         getMapController().getGeoPoint(new ScreenPoint(x, y));
@@ -73,55 +73,13 @@ public class DialogNewMark extends Overlay {
                                 newMark.setDescription(userInputDesc.getText().toString());
 
                                 //передаем данные
-                                HandlerMarks hm=new HandlerMarks();
+                                HandlerMarks hm=new HandlerMarks(getMapController());
                                 hm.sendMark(newMark, getMapController().getContext());
 
                                 Toast.makeText(
                                         getApplicationContext(),
                                         "Ваша метка добавлена на карту",
                                         Toast.LENGTH_SHORT).show();
-
-                                //сразу добавим метку на карту
-
-                                //ОСТОРОЖНО ДУБЛЯЖ КОДА С MAPACTIVITY с метода ShowObjects !!!!!!
-                                /*
-                                Resources res = getMapController().getContext().getResources();
-                                Overlay overlay = new Overlay(getMapController());
-
-                                OverlayManager mOverlayManager;
-                                mOverlayManager =getMapController().getOverlayManager();
-                                final OverlayItem mrk;
-                                switch (newMark.getType()){
-                                    case "dps":
-                                        mrk = new OverlayItem(new GeoPoint(newMark.getX(), newMark.getY()), res.getDrawable(R.drawable.dps));
-                                        break;
-                                    case "camera":
-                                        mrk = new OverlayItem(new GeoPoint(newMark.getX(), newMark.getY()),  res.getDrawable(R.drawable.camera));
-                                        break;
-                                    case "help":
-                                        mrk = new OverlayItem(new GeoPoint(newMark.getX(), newMark.getY()),  res.getDrawable(R.drawable.help));
-                                        break;
-                                    case "other":
-                                        mrk = new OverlayItem(new GeoPoint(newMark.getX(), newMark.getY()),  res.getDrawable(R.drawable.other));
-                                        break;
-                                    default:
-                                        mrk = new OverlayItem(new GeoPoint(newMark.getX(), newMark.getY()),  res.getDrawable(R.drawable.other));
-                                        break;
-                                }
-                                //!
-                                ImageBalloonItem balloonMrk = new ImageBalloonItem(getMapController(), mrk.getGeoPoint(), 0);
-
-                                balloonMrk.setDescriptionOnBalloon(newMark.getDescription());
-                                balloonMrk.setText(newMark.getDescription());
-                                balloonMrk.setOnViewClickListener();
-
-                                // Add the balloon model to the object
-                                mrk.setBalloonItem(balloonMrk);
-                                //Add the object to the layer
-                                overlay.addOverlayItem(mrk);
-                                // Add the layer to the map
-                                mOverlayManager.addOverlay(overlay);
-                                */
                             }
                         })
 
