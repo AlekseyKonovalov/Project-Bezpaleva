@@ -112,17 +112,17 @@ public class MapActivity extends AppCompatActivity  implements OnMyLocationListe
     @Override
     public void onMyLocationChange(MyLocationItem myLocationItem) {
         this.myLocationItem = myLocationItem;
-        int flag=0;
-        while (flag==0){
+      //  int flag=0;
+       // while (flag==0){
             try{
                 showObject(myLocationItem.getGeoPoint().getLat(), myLocationItem.getGeoPoint().getLon());
-                flag=1;
-                break;
+             //   flag=1;
+              //  break;
             }
             catch (Exception e){
                 Log.i("bzp1", "catch");
             }
-        }
+        //}
     }
 
 
