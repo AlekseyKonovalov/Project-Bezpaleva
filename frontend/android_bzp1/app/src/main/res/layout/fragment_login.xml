@@ -10,61 +10,65 @@
 
     <Button
         android:id="@+id/sign_in_button"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
+        android:layout_width="match_parent"
         android:layout_gravity="right"
         android:layout_marginTop="16dp"
         android:paddingLeft="32dp"
         android:paddingRight="32dp"
-        android:text="@string/action_sign_in_short"
+        android:text="Login"
+        android:textSize="18dp"
         android:background="#565656"
         android:textColor="#ffffff"
-        android:layout_width="match_parent"
+
  />
 
     <LinearLayout
         android:id="@+id/line1"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="10dp"
         android:orientation="horizontal"
         android:layout_gravity="center"
-        android:layout_weight="0"
+
         >
 
         <Button
             android:text="Карта"
             android:id="@+id/LogInbutMap"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
+            android:layout_width="wrap_content"
+            android:layout_height="140dp"
+            android:layout_weight="1"
             android:background="#565656"
             android:textColor="#ffffff"
             android:layout_marginRight="10dp"
+
             />
         <Button
             android:text="Настройки"
             android:id="@+id/LogInbutSettings"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
+            android:layout_width="wrap_content"
+            android:layout_height="140dp"
+            android:layout_weight="1"
             android:background="#565656"
             android:textColor="#ffffff"
             />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center"
-        android:layout_weight="0"
-
         >
 
         <Button
             android:text="Справка"
             android:id="@+id/LogInbutInfo"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
+            android:layout_width="wrap_content"
+            android:layout_height="140dp"
+            android:layout_weight="1"
             android:background="#565656"
             android:textColor="#ffffff"
             android:layout_marginRight="10dp"
@@ -73,8 +77,9 @@
         <Button
             android:text="Контакты"
             android:id="@+id/LogInbutContacts"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
+            android:layout_width="wrap_content"
+            android:layout_height="140dp"
+            android:layout_weight="1"
             android:background="#565656"
             android:textColor="#ffffff"
 

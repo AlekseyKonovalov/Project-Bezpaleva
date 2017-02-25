@@ -8,28 +8,32 @@
 
     <Button
         android:id="@+id/logout"
-        android:layout_height="60dp"
-        style="@style/Button"
+        android:layout_height="80dp"
+        android:layout_width="match_parent"
         android:layout_marginTop="16dp"
         android:background="#565656"
         android:textColor="#ffffff"
-        android:text="@string/logout"/>
+        android:text="@string/logout"
+        android:textSize="18dp"
+        />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/line1"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:layout_weight="0"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+
         >
 
         <Button
             android:text="Карта"
             android:id="@+id/LogOutbutMap"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
+            android:layout_width="wrap_content"
+            android:layout_height="140dp"
+            android:layout_weight="1"
             android:background="#565656"
             android:textColor="#ffffff"
             android:layout_marginRight="10dp"
@@ -38,27 +42,27 @@
         <Button
             android:text="Настройки"
             android:id="@+id/LogOutbutSettings"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
+            android:layout_width="wrap_content"
+            android:layout_height="140dp"
+            android:layout_weight="1"
             android:background="#565656"
             android:textColor="#ffffff"
             />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center"
-        android:layout_weight="0"
-
         >
 
         <Button
             android:text="Справка"
             android:id="@+id/LogOutbutInfo"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
+            android:layout_width="wrap_content"
+            android:layout_height="140dp"
+            android:layout_weight="1"
             android:background="#565656"
             android:textColor="#ffffff"
             android:layout_marginRight="10dp"
@@ -67,8 +71,9 @@
         <Button
             android:text="Контакты"
             android:id="@+id/LogOutbutContacts"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
+            android:layout_width="wrap_content"
+            android:layout_height="140dp"
+            android:layout_weight="1"
             android:background="#565656"
             android:textColor="#ffffff"
             />
