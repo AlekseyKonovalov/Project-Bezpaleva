@@ -44,10 +44,6 @@
             android:label="ServiceActivity"
             android:theme="@style/VK.Transparent" />
 
-        <activity android:name=".InputSystemActivity"
-            android:label="Вход в систему">
-        </activity>
-
         <activity android:name=".InformationActivityy"
             android:label="Справка">
         </activity>

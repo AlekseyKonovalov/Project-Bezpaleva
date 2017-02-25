@@ -22,6 +22,7 @@ public class ImageBalloonItemAlien   extends ImageBalloonOverall {
     LayoutInflater inflater;
     int idMark;
     Mark mark;
+    Boolean changeIrrel;
 
     public ImageBalloonItemAlien(MapController mMapController, GeoPoint geoPoint, int idMark, Mark mark) {
         super(mMapController.getContext(), geoPoint);
@@ -29,6 +30,7 @@ public class ImageBalloonItemAlien   extends ImageBalloonOverall {
         this.mark=mark;
         mContext = mMapController.getContext();
         this.mMapController=mMapController;
+        changeIrrel=false;
     }
 
     @Override
@@ -55,7 +57,8 @@ public class ImageBalloonItemAlien   extends ImageBalloonOverall {
         AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
         switch (view.getId()) {
             case R.id.balloon_alien_images:
-                mOverlayManager.addOverlay(new DialogChangeMark(mMapController, 1, mark));
+                mOverlayManager.addOverlay(new DialogChangeMark(mMapController, 1, mark, changeIrrel));
+                changeIrrel=true;
                 break;
         }
 

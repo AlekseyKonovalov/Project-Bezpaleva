@@ -87,6 +87,11 @@ public class HandlerMarks extends Overlay {
                     // Add the layer to the map
                     mOverlayManager.addOverlay(overlay);
 
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Ваша метка добавлена на карту",
+                            Toast.LENGTH_SHORT).show();
+
                 } else {
                     //request not successful (like 400,401,403 etc)
                     //Handle errors

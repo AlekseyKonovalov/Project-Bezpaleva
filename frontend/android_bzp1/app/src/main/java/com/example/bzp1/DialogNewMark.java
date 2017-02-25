@@ -76,10 +76,7 @@ public class DialogNewMark extends Overlay {
                                 HandlerMarks hm=new HandlerMarks(getMapController());
                                 hm.sendMark(newMark, getMapController().getContext());
 
-                                Toast.makeText(
-                                        getApplicationContext(),
-                                        "Ваша метка добавлена на карту",
-                                        Toast.LENGTH_SHORT).show();
+
                             }
                         })
 

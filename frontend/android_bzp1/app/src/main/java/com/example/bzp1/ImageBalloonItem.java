@@ -23,6 +23,7 @@ public class ImageBalloonItem extends ImageBalloonOverall{
     LayoutInflater inflater;
     int idMark;
     Mark mark;
+    Boolean changeIrrel;
 
 
     public ImageBalloonItem(MapController mMapController, GeoPoint geoPoint, int idMark, Mark mark) {
@@ -31,6 +32,7 @@ public class ImageBalloonItem extends ImageBalloonOverall{
         this.mMapController=mMapController;
         this.idMark=idMark;
         this.mark=mark;
+        changeIrrel=false;
     }
 
     @Override
@@ -58,11 +60,14 @@ public class ImageBalloonItem extends ImageBalloonOverall{
         AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
         switch (view.getId()) {
             case R.id.balloon_images_view1:
-                mOverlayManager.addOverlay(new DialogChangeMark(mMapController, 1, mark));
+                mOverlayManager.addOverlay(new DialogChangeMark(mMapController, 1, mark, changeIrrel));
+                changeIrrel=true;
                 break;
             case R.id.balloon_images_view2:
                 //change mark
-                mOverlayManager.addOverlay(new DialogChangeMark(mMapController, 2, mark));
+
+                mOverlayManager.addOverlay(new DialogChangeMark(mMapController, 2, mark,changeIrrel));
+
                 break;
         }
 

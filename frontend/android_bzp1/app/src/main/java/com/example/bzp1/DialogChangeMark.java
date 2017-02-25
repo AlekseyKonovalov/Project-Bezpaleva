@@ -23,11 +23,13 @@ public class DialogChangeMark extends Overlay{
     int idMark;
     Mark newMark;
     Mark oldMark;
+    Boolean changeIrrel;
 
-    public DialogChangeMark(MapController mapController, int typeChange, Mark mark) {
+    public DialogChangeMark(MapController mapController, int typeChange, Mark mark, Boolean changeIrrel) {
         super(mapController);
         this.idMark=mark.getId();
         this.oldMark=mark;
+        this.changeIrrel=changeIrrel;
 
         switch (typeChange) {
             case 1:
@@ -97,37 +99,46 @@ public class DialogChangeMark extends Overlay{
     }
 
     private void buildDialogChangeMarkIrrelevanceLevel() {
-        LayoutInflater li = LayoutInflater.from(getMapController().getContext());
-        View dialogView = li.inflate(R.layout.dialogchangeirrelevancelevel, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getMapController().getContext());
 
-        builder.setTitle("Изменение актуальности метки")
-                .setCancelable(false)
-                .setView(dialogView)
-                .setPositiveButton("Да",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog,
-                                                int id) {
-                                HandlerMarks hm=new HandlerMarks(getMapController());
-                                hm.changeIrrelevanceLevel(idMark, getMapController().getContext());
+        if (changeIrrel==false) {
+            LayoutInflater li = LayoutInflater.from(getMapController().getContext());
+            View dialogView = li.inflate(R.layout.dialogchangeirrelevancelevel, null);
+            AlertDialog.Builder builder = new AlertDialog.Builder(getMapController().getContext());
 
-                                Toast.makeText(
-                                        getApplicationContext(),
-                                        "Актуальность метки изменена",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        })
+            builder.setTitle("Изменение актуальности метки")
+                    .setCancelable(false)
+                    .setView(dialogView)
+                    .setPositiveButton("Да",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int id) {
+                                    HandlerMarks hm = new HandlerMarks(getMapController());
+                                    hm.changeIrrelevanceLevel(idMark, getMapController().getContext());
 
-                .setNegativeButton("Нет",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog,
-                                                int id) {
-                                dialog.cancel();
-                            }
-                        });
+                                    Toast.makeText(
+                                            getApplicationContext(),
+                                            "Актуальность метки изменена",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            })
 
-        builder.create().show();
+                    .setNegativeButton("Нет",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+            builder.create().show();
+        }
+        else{
+            Toast.makeText(
+                    getApplicationContext(),
+                    "Вы уже понижали актуальность этой метки",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 }

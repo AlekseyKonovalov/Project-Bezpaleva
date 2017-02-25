@@ -93,7 +93,8 @@ public class LoginActivity extends FragmentActivity {
 
             }
         });
-
+        String[] fingerprint = VKUtil.getCertificateFingerprint(this, this.getPackageName());
+        Log.i("bzp1", fingerprint[0]);
     }
 
     private void showLogout() {
