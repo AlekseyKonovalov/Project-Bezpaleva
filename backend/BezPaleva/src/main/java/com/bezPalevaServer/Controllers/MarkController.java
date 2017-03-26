@@ -1,9 +1,10 @@
 package com.bezPalevaServer.Controllers;
 
 import com.bezPalevaServer.Services.MarkService;
-import com.bezPalevaServer.Services.SystemParameters;
 import com.bezPalevaServer.Services.UserService;
 import com.bezPalevaServer.db.Mark;
+import com.bezPalevaServer.db.SysParamRepository;
+import com.bezPalevaServer.db.SystemParameters;
 import com.bezPalevaServer.db.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -28,7 +29,10 @@ public class MarkController {
     @Autowired
     UserService userService;
     @Autowired
-    SystemParameters systemParameters;
+    SysParamRepository sysParamRepository;
+
+
+
 
     @RequestMapping(value = "/mark", method = RequestMethod.GET)
     public ArrayList<Mark> getMarks (@RequestParam Map<String, String> params)  {
@@ -56,7 +60,9 @@ public class MarkController {
 
             User user = userService.getUserFromDB(Long.parseLong(userId));
 
-            if(user.getNumberMarksPerDay() <= systemParameters.getMaxNumberMarksPerDay()) {
+            SystemParameters systemParameters =  sysParamRepository.findOne(0);
+
+            if(user.getNumberMarksPerDay() < systemParameters.getMaxNumberMarksPerDay()) {
 
                 user.incNumberMarksPerDay();
 
@@ -82,7 +88,6 @@ public class MarkController {
         String type = params.get("type");
         String photoPath = params.get("photo");
         String irrelevance = params.get("irrel");
-        String userId = params.get("userId");
 
         if (id != null){
             Mark mark = markService.getMarkFromDB(Long.parseLong(id));

@@ -1,20 +1,28 @@
 package com.bezPalevaServer.Services;
 
-
 import com.bezPalevaServer.db.MarkRepository;
+import com.bezPalevaServer.db.SysParamRepository;
+import com.bezPalevaServer.db.SystemParameters;
 import com.bezPalevaServer.db.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+
 
 @EnableScheduling
 @Component
@@ -26,11 +34,13 @@ public class Scheduler {
     @Autowired
     UserRepository userRepository;
     @Autowired
-    SystemParameters systemParameters;
+    SysParamRepository sysParamRepository;
 
     @Transactional
     @Scheduled(fixedDelay = 3600000)
-    public void deleteMarks() {
+    public void deleteMarks(){
+
+        SystemParameters systemParameters =  sysParamRepository.findOne(0);
 
         Timestamp currentTime =  new Timestamp(new Date().getTime());
 
@@ -49,4 +59,5 @@ public class Scheduler {
 
         userRepository.resetNumberMarks();
     }
+
 }
