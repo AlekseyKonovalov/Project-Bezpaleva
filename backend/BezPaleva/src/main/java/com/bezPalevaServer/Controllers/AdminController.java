@@ -32,7 +32,7 @@ public class AdminController {
     MarkService markService;
 
     @RequestMapping(value = "/admin", method = RequestMethod.POST)
-    public SystemParameters changeSysParam (@RequestParam Map<String, String> params) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException, IOException {
+    public SystemParameters changeSysParam (@RequestParam Map<String, String> params) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException {
 
         Decryptor decryptor = new Decryptor();
 
@@ -55,7 +55,7 @@ public class AdminController {
 
 
     @RequestMapping(value = "/deleteMark", method = RequestMethod.POST)
-    public void deleteMark (@RequestParam Map<String, String> params) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, IOException, IllegalBlockSizeException {
+    public void deleteMark (@RequestParam Map<String, String> params) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException {
 
         Decryptor decryptor = new Decryptor();
 

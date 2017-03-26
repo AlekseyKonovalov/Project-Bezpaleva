@@ -10,11 +10,21 @@ public class Decryptor {
 
     Cipher dcipher;
 
-    public  boolean checkSecretKey(String secretKey) throws IOException, BadPaddingException, IllegalBlockSizeException {
+    public  boolean checkSecretKey(String secretKey) {
 
-        byte[] dec = new sun.misc.BASE64Decoder().decodeBuffer(secretKey);
-        byte[] utf8 = dcipher.doFinal(dec);
-        secretKey = new String(utf8, "UTF8");
+        byte[] utf8;
+        byte[] dec;
+        try {
+
+            dec = new sun.misc.BASE64Decoder().decodeBuffer(secretKey);
+            utf8 = dcipher.doFinal(dec);
+            secretKey = new String(utf8, "UTF8");
+        }
+        catch (Exception e){
+
+            return false;
+        }
+
 
         if(secretKey.equals("%@wFGQMt9MN?|mb8ay*ok4@qq7o}5IS2|bj")) return true;
         else return false;
