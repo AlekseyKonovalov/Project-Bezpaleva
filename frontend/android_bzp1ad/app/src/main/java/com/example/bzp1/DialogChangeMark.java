@@ -105,7 +105,7 @@ public class DialogChangeMark extends Overlay{
             View dialogView = li.inflate(R.layout.dialogchangeirrelevancelevel, null);
             AlertDialog.Builder builder = new AlertDialog.Builder(getMapController().getContext());
 
-            builder.setTitle("Изменение актуальности метки")
+            builder.setTitle("Удаление метки")
                     .setCancelable(false)
                     .setView(dialogView)
                     .setPositiveButton("Да",
@@ -118,7 +118,7 @@ public class DialogChangeMark extends Overlay{
 
                                     Toast.makeText(
                                             getApplicationContext(),
-                                            "Актуальность метки изменена",
+                                            "Метка удалена",
                                             Toast.LENGTH_SHORT).show();
                                 }
                             })

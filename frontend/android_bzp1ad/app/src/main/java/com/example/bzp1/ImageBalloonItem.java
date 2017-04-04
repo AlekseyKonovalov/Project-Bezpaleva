@@ -61,7 +61,7 @@ public class ImageBalloonItem extends ImageBalloonOverall{
         switch (view.getId()) {
             case R.id.balloon_images_view1:
                 mOverlayManager.addOverlay(new DialogChangeMark(mMapController, 1, mark, changeIrrel));
-                changeIrrel=true;
+                //changeIrrel=true;
                 break;
             case R.id.balloon_images_view2:
                 //change mark

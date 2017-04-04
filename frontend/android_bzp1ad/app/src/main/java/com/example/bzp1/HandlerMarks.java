@@ -113,9 +113,10 @@ public class HandlerMarks extends Overlay {
                 .baseUrl(webServiceUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+
         MarkChangeLevelPost service = retrofit.create(MarkChangeLevelPost.class);
 
-        Call <Mark> call = service.sendMark(idMark, 1);
+        Call <Mark> call = service.sendMark(idMark, "07@7ko23GWEsp@#");
 
 
         call.enqueue(new Callback<Mark>() {

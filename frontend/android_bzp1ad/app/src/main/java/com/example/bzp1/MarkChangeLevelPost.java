@@ -6,6 +6,6 @@ import retrofit2.http.Query;
 
 
 public interface MarkChangeLevelPost {
-    @POST("/changeMark?")
-    Call<Mark> sendMark(@Query("id") int id, @Query("irrel") int irrel);
+    @POST("/deleteMark?")
+    Call<Mark> sendMark(@Query("idMark") int id, @Query("key") String key);
 }

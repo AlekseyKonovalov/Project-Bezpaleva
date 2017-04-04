@@ -176,10 +176,10 @@ public class MapActivity extends AppCompatActivity  implements OnMyLocationListe
                         //Create a balloon model for the object
                         ImageBalloonOverall balloonMrk;
 
-                        if(t.getUserId()==MapUserID){
+                       // if(t.getUserId()==MapUserID){
                             balloonMrk = new ImageBalloonItem(mMapController, mrk.getGeoPoint(), t.getId(), t);
-                        }
-                        else balloonMrk=new ImageBalloonItemAlien(mMapController, mrk.getGeoPoint(), t.getId(), t);
+//                        }
+//                        else balloonMrk=new ImageBalloonItemAlien(mMapController, mrk.getGeoPoint(), t.getId(), t);
 
 
                         balloonMrk.setDescriptionOnBalloon(t.getDescription());
