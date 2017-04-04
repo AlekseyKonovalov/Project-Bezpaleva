@@ -48,6 +48,9 @@ public class MarkService {
         return repository.findOne(id);
     }
 
+    @Transactional
+    public void deletemMarkIbBD(long id) { repository.delete(id);}
+
     public void createPhotoFile(MultipartFile photoFile, Mark mark, String photoPath) throws IOException {
 
         String typePhoto = photoFile.getContentType();
