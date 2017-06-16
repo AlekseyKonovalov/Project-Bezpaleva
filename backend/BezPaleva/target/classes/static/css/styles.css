@@ -89,3 +89,14 @@ a.btn.btn-red {
 .center_contacts{margin-top: 100px; width: 10%; margin-left: 45%}
 .black{  background-color: RGB(0, 0, 0);
 }
+
+
+.about-heading{
+	color : white;
+	font-size: 42px;
+}
+
+.about-text{
+	color:white;
+	font-size: 24px;
+}

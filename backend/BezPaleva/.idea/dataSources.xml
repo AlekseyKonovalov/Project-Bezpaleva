@@ -4,8 +4,22 @@
     <data-source source="LOCAL" name="MySQL - bezPaleva@localhost" uuid="76bd6743-af28-4977-aec5-434137c4aa53">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-driver>org.gjt.mm.mysql.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/bezPaleva</jdbc-url>
+      <driver-properties>
+        <property name="autoReconnect" value="true" />
+        <property name="zeroDateTimeBehavior" value="convertToNull" />
+        <property name="tinyInt1isBit" value="false" />
+        <property name="characterEncoding" value="utf8" />
+        <property name="characterSetResults" value="utf8" />
+        <property name="yearIsDateType" value="false" />
+      </driver-properties>
+    </data-source>
+    <data-source source="LOCAL" name="MySQL - bezPaleva@46.8.29.92" uuid="8780314f-c1dc-4a5c-a4b0-00efe9cad9d0">
+      <driver-ref>mysql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://46.8.29.92:3306/bezPaleva</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="convertToNull" />

@@ -18,13 +18,4 @@ public class IndexController {
         return  indexView;
     }
 
-    @RequestMapping("/log")
-    public ModelAndView log (){
-
-        ModelAndView log = new ModelAndView("log");
-
-        return  log;
-    }
-
-
 }
